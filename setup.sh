@@ -11,7 +11,7 @@ SCRIPTPATH=$( dirname ${SCRIPT} )
 
 for file in ${SCRIPTPATH}/.*; do
   f=$( basename $file)
-  if [ ! $f = '.' ] | [ ! $f = '..' ]; then 
+  if [ ! $f = '.' ] | [ ! $f = '..' ] | [ ! $f = '.git' ]; then 
     ln -snf $file ~
   fi
 done
