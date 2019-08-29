@@ -5,6 +5,8 @@ alias d='docker'
 alias k='kubectl'
 alias cat='bat --style=plain --paging=never'
 alias ping='prettyping --nolegend'
+alias myip='dig @resolver1.opendns.com ANY myip.opendns.com +short'
+
 
 # bash Completions
 [[ -r '/usr/local/etc/profile.d/bash_completion.sh' ]] && source '/usr/local/etc/profile.d/bash_completion.sh'

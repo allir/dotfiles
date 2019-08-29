@@ -1,13 +1,11 @@
 export OWNER='Aðalsteinn Rúnarsson'
 export LANG=en_US.UTF-8
-#export LANG=is_IS.UTF-8
 
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
-#export LS_COLORS="ow=01;90:di=01;90"
 
-export HISTFILESIZE=10000
-export HISTSIZE=10000
+export HISTFILESIZE=20000
+export HISTSIZE=20000
 PROMPT_COMMAND='history -a; history -c; history -r'
 
 #PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
