@@ -2526,9 +2526,9 @@
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>1002 675 796 486 0 0 1920 1177 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>30 274 885 518 0 0 1920 1177 </string>
+	<string>46 457 850 434 0 0 1920 1177 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>468 192 850 434 0 0 1920 1177 </string>
+	<string>920 454 850 434 0 0 1920 1177 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
 	<string>185 121 850 434 0 0 1920 1177 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
@@ -4243,6 +4243,7 @@
 		<string>3.2.9</string>
 		<string>3.3.1</string>
 		<string>3.3.0</string>
+		<string>3.3.3</string>
 	</array>
 	<key>NoSyncBFPRecents</key>
 	<array>
@@ -4267,9 +4268,9 @@
 	<key>NoSyncInstallationId</key>
 	<string>80DCABB7-9168-48F2-9137-252B276F9498</string>
 	<key>NoSyncLastTipTime</key>
-	<real>588299043.43121898</real>
+	<real>589071383.54394805</real>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>7</integer>
+	<integer>13</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -4990,6 +4991,7 @@
 		<string>0036</string>
 		<string>0037</string>
 		<string>0038</string>
+		<string>0039</string>
 	</array>
 	<key>PointerActions</key>
 	<dict>
@@ -5025,7 +5027,7 @@
 		</dict>
 	</dict>
 	<key>PrefsCustomFolder</key>
-	<string>/Users/allir/.iTerm2</string>
+	<string>~/.iterm</string>
 	<key>PromptOnQuit</key>
 	<false/>
 	<key>QuitWhenAllWindowsClosed</key>
@@ -5039,7 +5041,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2019-08-24T20:50:28Z</date>
+	<date>2019-09-08T21:12:31Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateRelaunchingMarker</key>
@@ -5067,7 +5069,7 @@
 	<key>WordCharacters</key>
 	<string>/-+\~_.</string>
 	<key>iTerm Version</key>
-	<string>3.3.2</string>
+	<string>3.3.3</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
