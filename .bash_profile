@@ -16,10 +16,16 @@ tac "$HISTFILE" | awk '!x[$0]++' > /tmp/history && tac /tmp/history > "$HISTFILE
 # Use GNU Tools over BSD
 #PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 #MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+#PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"
+#MANPATH="/usr/local/opt/findutils/libexec/gnuman:$MANPATH"
 PATH="/usr/local/opt/grep/libexec/gnubin:$PATH"
 MANPATH="/usr/local/opt/grep/libexec/gnuman:$MANPATH"
 PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 MANPATH="/usr/local/opt/gnu-sed/libexec/gnuman:$MANPATH"
+PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"
+MANPATH="/usr/local/opt/gnu-tar/libexec/gnuman:$MANPATH"
+PATH="/usr/local/opt/gnu-getopt/bin:$PATH"
+MANPATH="/usr/local/opt/gnu-getopt/libexec/gnuman:$MANPATH"
 
 # Display Archey if installed
 if command -v archey &>/dev/null; then
