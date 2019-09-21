@@ -75,6 +75,7 @@ brew "speedtest-cli"
 
 # Apps
 cask "appcleaner"
+cask "keepingyouawake"
 cask "1password-beta"
 cask "1password-cli"
 cask "spotify"
