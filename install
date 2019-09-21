@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# This is pretty ugly, but it works on macOS without requiring coreutils for GNU readlink
+# Ideally this would be:
+# SCRIPT=$( readlink -f ${BASH_SOURCE[0]} )
+SCRIPT=$( cd "$(dirname ${BASH_SOURCE[0]})" &>/dev/null && pwd )/$( basename ${BASH_SOURCE[0]} )
+SCRIPTPATH=$( dirname ${SCRIPT} )
+
+# Ask for the administrator password upfront
+sudo -v
+# Keep-alive: update existing `sudo` time stamp until finished
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+# Install xcode command line tools
+xcode-select --install
+
+# Install Homebrew, Formulae & Casks
+${SCRIPTPATH}/homebrew-setup.sh
+if ! ( grep "/usr/local/bin/bash" /etc/shells &>/dev/null ); then
+  echo "/usr/local/bin/bash" | sudo tee -a /etc/shells
+fi
+if ! ( grep "/usr/local/bin/zsh" /etc/shells &>/dev/null ); then
+  echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells
+fi
+# chsh prompts for password
+#chsh -s /usr/local/bin/bash
+
+# Link dotfiles
+${SCRIPTPATH}/symlink-setup.sh
+
+# Configure iTerm2
+${SCRIPTPATH}/.iterm/iterm-setup.sh
+
+echo -e "\n\nNote that the default shell has not been updated. Run `chsh -s /path/to/shell` to change it."
