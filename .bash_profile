@@ -8,10 +8,11 @@ export LSCOLORS=ExFxBxDxCxegedabagacad
 
 # History Management
 export HISTCONTROL=ignoreboth:erasedups
-export HISTFILESIZE=20000
-export HISTSIZE=20000
+export HISTFILESIZE=25000
+export HISTSIZE=25000
 PROMPT_COMMAND='history -a; history -c; history -r'
-tac "$HISTFILE" | awk '!x[$0]++' > /tmp/history && tac /tmp/history > "$HISTFILE" && rm /tmp/history
+## Prunes all duplicates from history
+#tac "$HISTFILE" | awk '!x[$0]++' > /tmp/history && tac /tmp/history > "$HISTFILE" && rm /tmp/history
 
 # Use GNU Tools over BSD
 #PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
