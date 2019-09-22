@@ -42,8 +42,9 @@ brew "docker-completion"
 brew "docker-compose-completion"
 brew "kubernetes-cli"
 brew "kubernetes-helm"
-brew "kubectx"
 brew "kustomize"
+brew "kubectx"
+brew "kube_ps1"
 cask "minikube"
 
 # Browsers
