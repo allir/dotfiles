@@ -6,9 +6,12 @@ sudo -v
 # Keep-alive: update existing `sudo` time stamp until finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
+# Install xcode command line tools (includes git)
+xcode-select --install
+
 # Clone the repository
 cd ~
-git clone https://github.com/allir/dotfiles.git .dotfiles
+git clone https://github.com/allir/dotfiles.git .dotfiles || true
 
 # Run setup
 .dotfiles/install
