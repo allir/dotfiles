@@ -13,7 +13,7 @@ sudo -v
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 # Install xcode command line tools
-xcode-select --install
+xcode-select --install || true
 
 # Install Homebrew, Formulae & Casks
 ${SCRIPTPATH}/homebrew-setup.sh
