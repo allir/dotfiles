@@ -44,7 +44,6 @@ brew "kubernetes-cli"
 brew "kubernetes-helm"
 brew "kustomize"
 brew "kubectx"
-brew "kube-ps1"
 cask "minikube"
 
 # Browsers
@@ -61,6 +60,7 @@ cask "visual-studio-code"
 # CLI Tools
 brew "fzf"
 brew "archey"
+brew "cowsay"
 brew "fortune"
 brew "cowsay"
 brew "bat"
