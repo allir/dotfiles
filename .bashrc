@@ -48,20 +48,3 @@ if [ -f '/usr/local/opt/bash-git-prompt/share/gitprompt.sh' ]; then
   GIT_PROMPT_THEME_FILE=~/.git-prompt/git-prompt-colors
   source '/usr/local/opt/bash-git-prompt/share/gitprompt.sh'
 fi
-### Kube PS1
-if [ -f '/usr/local/opt/kube-ps1/share/kube-ps1.sh' ]; then
-  # Additional if statemant as if bashrc is sourced again it will re-add stuff to PROMPT_COMMAND
-  if ! (echo $PROMPT_COMMAND | grep kube_ps1_update_cache\; &>/dev/null); then
-    KUBE_PS1_PREFIX=''
-    KUBE_PS1_SUFFIX=''
-    KUBE_PS1_SEPARATOR='| '
-    KUBE_PS1_SYMBOL_COLOR=blue
-    KUBE_PS1_CTX_COLOR=blue
-    KUBE_PS1_NS_COLOR=cyan
-    source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
-    kubeoff -g
-    # Note: because of bash-git-prompt setting the PS1 variable doesn't work as it will override it with a PROMPT COMMAND. Instead we add it to the prompt command.
-    #PS1="$(kube_ps1)\n${PS1}
-    PROMPT_COMMAND="$(echo $PROMPT_COMMAND | sed 's/_kube_ps1_update_cache;/_kube_ps1_update_cache;kube_ps1;/g')"
-  fi
-fi
