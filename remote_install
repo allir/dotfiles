@@ -15,5 +15,3 @@ git clone https://github.com/allir/dotfiles.git .dotfiles || true
 
 # Run setup
 .dotfiles/install
-
-

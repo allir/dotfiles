@@ -39,3 +39,4 @@ echo -e "Configuring iTerm2"
 ${SCRIPTPATH}/.iterm/iterm-setup.sh
 
 echo -e "\n\nNote that the default shell has not been updated. Run \"chsh -s /path/to/shell\" to change it."
+echo -e "Fore example: \"chsh -s /usr/local/bin/bash\" or \"chsh -s /usr/local/bin/zsh\""
