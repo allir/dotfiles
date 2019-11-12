@@ -18,7 +18,7 @@ alias va='source ./venv/bin/activate'
 
 # Docker/Kubernetes
 kube(){
-  export KUBECONFIG=~/.kube/${1}
+  export KUBECONFIG=~/.kube/configs/${1}
 }
 kubedecode(){
   kubectl get secret -o json $* | jq -r '.data | map_values(@base64d)'
@@ -28,6 +28,11 @@ alias k='kubectl'
 alias kg='kubectl get'
 alias kd='kubectl describe'
 alias kl='kubectl logs'
+
+## Prunes all duplicates from history
+history_prune(){
+  tac "$HISTFILE" | awk '!x[$0]++' > /tmp/history && tac /tmp/history > "$HISTFILE" && rm /tmp/history
+}
 
 # bash Completions
 [[ -r '/usr/local/etc/profile.d/bash_completion.sh' ]] && source '/usr/local/etc/profile.d/bash_completion.sh'
