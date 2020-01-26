@@ -44,13 +44,13 @@ brew "kubernetes-cli"
 brew "helm"
 brew "kustomize"
 brew "kubectx"
+brew "stern"
 cask "minikube"
 
 # Browsers
 cask "firefox"
 cask "google-chrome"
 cask "brave-browser"
-
 
 # Source Control & Editors
 brew "git"
@@ -63,6 +63,7 @@ brew "archey"
 brew "cowsay"
 brew "fortune"
 brew "cowsay"
+brew "lolcat"
 brew "bat"
 brew "glances"
 brew "htop"
