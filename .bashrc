@@ -2,6 +2,7 @@
 alias ll='ls -l'
 alias lt='du -sh * | sort -h'
 alias left='ls -t -1'
+alias depth="find . -type d | awk -F\"/\" 'NF > max {max = NF-1} END {print max}'"
 alias grep='grep --color=auto'
 alias cat='bat --style=plain --paging=never'
 alias ping='prettyping --nolegend'
@@ -16,12 +17,20 @@ alias starwars='nc towel.blinkenlights.nl 23'
 alias ve='python3 -m venv ./venv'
 alias va='source ./venv/bin/activate'
 
+# Git
+git-prune(){
+  git branch -vv | grep origin | grep gone | awk '{print $1}'|xargs -L 1 git branch -D
+}
+
 # Docker/Kubernetes
 kube(){
   export KUBECONFIG=~/.kube/configs/${1}
 }
 kubedecode(){
   kubectl get secret -o json $* | jq -r '.data | map_values(@base64d)'
+}
+daemoncat(){
+  kubectl exec -ti -n daemoncat $* -- nsenter -t 1 -m -i -n -u bash
 }
 alias d='docker'
 alias k='kubectl'
@@ -35,14 +44,14 @@ history_prune(){
 }
 
 # bash Completions
-[[ -r '/usr/local/etc/profile.d/bash_completion.sh' ]] && source '/usr/local/etc/profile.d/bash_completion.sh'
+[ -r '/usr/local/etc/profile.d/bash_completion.sh' ] && source '/usr/local/etc/profile.d/bash_completion.sh'
 
 # Fuzzy Find
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+[ -r ~/.fzf.bash ] && source ~/.fzf.bash
 
 # Prompt
 ### Git Prompt
-if [ -f '/usr/local/opt/bash-git-prompt/share/gitprompt.sh' ]; then
+if [ -r '/usr/local/opt/bash-git-prompt/share/gitprompt.sh' ]; then
   __GIT_PROMPT_DIR=/usr/local/opt/bash-git-prompt/share
   GIT_PROMPT_THEME=Custom
   GIT_PROMPT_THEME_FILE=~/.git-prompt/git-prompt-colors
