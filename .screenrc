@@ -22,5 +22,4 @@ bind - resize -3
 hardstatus on
 hardstatus alwayslastline
 #hardstatus string "%{=b}%{G} Screen(s): %{b}%w"
-hardstatus string "%{.kW}%-w%{.bW}%t [%n]%{-}%+w %=%{..G} $USER@%H %{..Y} %Y/%m/%d %c"
-
+hardstatus string "%{.kG}%-w%{.Gk}%t [%n]%{-}%+w %=%{..G} %H %{..G} %d/%m/%Y %C"
