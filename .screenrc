@@ -10,6 +10,10 @@ autodetach on
 # Hide startup message
 startup_message off
 
+# Unbind lockscreen
+bind x
+bind C-x
+
 # Resize the current region
 bind = resize =
 bind + resize +3
