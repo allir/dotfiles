@@ -8,9 +8,8 @@ brew "brew-cask-completion"
 
 # Fonts
 cask "font-fira-code"
-cask "font-hack-nerd-font-mono"
+cask "font-hack-nerd-font"
 cask "font-mononoki-nerd-font"
-cask "font-mononoki-nerd-font-mono"
 
 # Terminal
 cask "iterm2"
@@ -49,7 +48,7 @@ brew "helm"
 brew "kustomize"
 brew "kubectx"
 brew "stern"
-cask "minikube"
+brew "minikube"
 
 # Browsers
 cask "firefox"
