@@ -8,7 +8,7 @@ SCRIPT=$( cd "$(dirname ${BASH_SOURCE[0]})" &>/dev/null && pwd )/$( basename ${B
 SCRIPTPATH=$( dirname ${SCRIPT} )
 
 # Setup Homebrew
-echo | /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 brew analytics off
 
 # Install brews/casks
