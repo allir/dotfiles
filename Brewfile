@@ -24,8 +24,9 @@ brew "zsh-completions"
 
 # GNU Tools
 brew "coreutils"
-brew "findutils"
+brew "binutils"
 brew "diffutils"
+brew "findutils"
 brew "gawk"
 brew "gnu-getopt"
 brew "gnu-indent"
@@ -35,6 +36,9 @@ brew "gnu-time"
 brew "gnu-which"
 brew "gnutls"
 brew "grep"
+brew "gzip"
+brew "make"
+brew "screen"
 
 # Docker / Kubernetes
 cask "docker"
@@ -58,7 +62,6 @@ brew "vim"
 cask "visual-studio-code"
 
 # CLI Tools
-brew "screen"
 brew "tmux"
 brew "fzf"
 brew "cfssl"
