@@ -25,7 +25,7 @@ while [[ "$check" == "$str" ]]; do
 done
 
 # Install Homebrew, Formulae & Casks
-echo -e "Setting up homebrew + Brewfile bundle"
+echo -e "Setting up Homebrew + Brewfile bundle..."
 ${SCRIPTPATH}/homebrew-setup.sh
 if ! ( grep "/usr/local/bin/bash" /etc/shells &>/dev/null ); then
   echo "Adding bash to /etc/shells"
@@ -35,7 +35,7 @@ if ! ( grep "/usr/local/bin/zsh" /etc/shells &>/dev/null ); then
   echo "Adding zsh to /etc/shells"
   echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells > /dev/null
 fi
-# chsh prompts for password
+# chsh prompts for password?
 #chsh -s /usr/local/bin/bash
 
 # Link dotfiles
@@ -47,4 +47,4 @@ echo -e "Configuring iTerm2"
 ${SCRIPTPATH}/.iterm/iterm-setup.sh
 
 echo -e "\n\nNote that the default shell has not been updated. Run \"chsh -s /path/to/shell\" to change it."
-echo -e "Fore example: \"chsh -s /usr/local/bin/bash\" or \"chsh -s /usr/local/bin/zsh\""
+echo -e "For example: \"chsh -s /usr/local/bin/bash\" or \"chsh -s /usr/local/bin/zsh\""
