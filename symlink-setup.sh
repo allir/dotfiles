@@ -7,9 +7,11 @@ set -euo pipefail
 SCRIPT=$( cd "$(dirname ${BASH_SOURCE[0]})" &>/dev/null && pwd )/$( basename ${BASH_SOURCE[0]} )
 SCRIPTPATH=$( dirname ${SCRIPT} )
 
+# Symlink all "dotfiles" with some exeptions
+NOLINK=". .. .git .gitignore"
 for file in ${SCRIPTPATH}/.*; do
   f=$( basename $file)
-  if [ ! $f = '.' ] | [ ! $f = '..' ] | [ ! $f = '.git' ]; then 
+  if [[ ! $NOLINK =~ (^|[[:space:]])"$f"($|[[:space:]]) ]]; then
     ln -snf $file ~
   fi
 done
