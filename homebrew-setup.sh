@@ -8,8 +8,10 @@ SCRIPT=$( cd "$(dirname ${BASH_SOURCE[0]})" &>/dev/null && pwd )/$( basename ${B
 SCRIPTPATH=$( dirname ${SCRIPT} )
 
 # Setup Homebrew
+echo -e "Installing Homebrew"
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 brew analytics off
 
 # Install brews/casks
-brew bundle --file=${SCRIPTPATH}/Brewfile
+echo -e "Installing Formulae and Casks"
+brew bundle --file=${SCRIPTPATH}/Brewfile || true
