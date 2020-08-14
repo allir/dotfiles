@@ -1,4 +1,7 @@
-# Completions
+# Aliases
+source ~/.shell/.alias
+
+# zsh Completions
 if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
 

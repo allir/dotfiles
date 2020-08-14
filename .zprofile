@@ -5,8 +5,3 @@ source ~/.shell/.env
 if command -v archey &>/dev/null; then
 	archey
 fi
-
-# Source .bashrc
-if [ -e $HOME/.bashrc ]; then
-  source $HOME/.bashrc
-fi
