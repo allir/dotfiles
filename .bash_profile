@@ -7,6 +7,6 @@ if command -v archey &>/dev/null; then
 fi
 
 # Source .bashrc
-if [ -e $HOME/.bashrc ]; then
+if [ -f $HOME/.bashrc ]; then
   source $HOME/.bashrc
 fi
