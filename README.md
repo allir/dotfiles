@@ -4,7 +4,8 @@ My macOS dotfiles repo.
 
 ## Installation
 
-Before installing you may want to make sure your computer is up to date. 
+Before installing you may want to make sure your computer is up to date.
+
 * `sudo softwareupdate -i -a`
 
 ### Prerequisites
@@ -16,12 +17,12 @@ Before installing you may want to make sure your computer is up to date.
 1. Run the `install` script.
 
     ```bash
-    curl -s https://raw.githubusercontent.com/allir/dotfiles/master/remote_install | bash 
+    curl -s https://raw.githubusercontent.com/allir/dotfiles/master/remote_install | bash
     ```
 
     OR
 
-    ```
+    ```bash
     git clone https://github.com/allir/dotfiles.git ~/.dotfiles
     ~/.dotfiles/install
     ```
