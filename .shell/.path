@@ -17,5 +17,11 @@ if command -v go &>/dev/null; then
   PATH="$PATH:$(go env GOPATH)/bin"
 fi
 
+if [ -d ${KREW_ROOT:-$HOME/.krew}/bin ]; then 
+  PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+fi
+
 # Add home bin to path
-PATH="$PATH:~/bin"
+if [ -d ~/bin ]; then
+  PATH="~/bin:$PATH"
+fi
