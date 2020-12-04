@@ -5,7 +5,7 @@ source ~/.shell/.alias
 [ -r '/usr/local/etc/profile.d/bash_completion.sh' ] && source '/usr/local/etc/profile.d/bash_completion.sh'
 
 # Fuzzy Find
-if [ "$OS" == "Darwin" ]; then
+if command -v fzf &>/dev/null; then
   [ -r ~/.fzf.bash ] && source ~/.fzf.bash
 fi
 

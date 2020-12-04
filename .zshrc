@@ -10,6 +10,6 @@ if type brew &>/dev/null; then
 fi
 
 # Fuzzy Find
-if [ "$OS" == "Darwin" ]; then
+if command -v fzf &>/dev/null; then
   [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 fi
