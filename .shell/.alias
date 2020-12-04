@@ -3,7 +3,6 @@ alias ll='ls -l'
 alias lt='du -sh * | sort -h'
 alias left='ls -t -1'
 alias depth="find . -type d | awk -F\"/\" 'NF > max {max = NF-1} END {print max}'"
-alias grep='grep --color=auto'
 alias cat='bat --style=plain --paging=never'
 alias ping='prettyping --nolegend'
 alias myip='dig @resolver1.opendns.com ANY myip.opendns.com +short'
