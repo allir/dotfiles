@@ -5,7 +5,9 @@ source ~/.shell/.alias
 [ -r '/usr/local/etc/profile.d/bash_completion.sh' ] && source '/usr/local/etc/profile.d/bash_completion.sh'
 
 # Fuzzy Find
-[ -r ~/.fzf.bash ] && source ~/.fzf.bash
+if [ "$OS" == "Darwin" ]; then
+  [ -r ~/.fzf.bash ] && source ~/.fzf.bash
+fi
 
 # Prompt
 ### Git Prompt
