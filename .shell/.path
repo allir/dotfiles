@@ -14,7 +14,12 @@ MANPATH="/usr/local/opt/gnu-getopt/libexec/gnuman:$MANPATH"
 
 # Add Go to path
 if command -v go &>/dev/null; then
-  PATH="$PATH:$(go env GOPATH)/bin"
+  PATH="$(go env GOPATH)/bin:$PATH:"
+fi
+
+# Add Rust to path
+if comman -v rustup &>/dev/null; then
+  source "$HOME/.cargo/env"
 fi
 
 if [ -d ${KREW_ROOT:-$HOME/.krew}/bin ]; then 

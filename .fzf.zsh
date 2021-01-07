@@ -3,7 +3,7 @@
 case `uname -s` in
   "Darwin" )
     if [[ ! "$PATH" == */usr/local/opt/fzf/bin* ]]; then
-      export PATH="$PATH:/usr/local/opt/fzf/bin"
+      export PATH="/usr/local/opt/fzf/bin:$PATH"
     fi
     # Auto-completion
     # ---------------
