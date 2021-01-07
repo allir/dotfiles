@@ -3,3 +3,8 @@
 	name = Aðalsteinn Rúnarsson
 [core]
 	editor = vim
+[pull]
+	ff = only
+
+[include]
+path = ~/.gitconfig.local
