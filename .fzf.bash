@@ -2,7 +2,7 @@
 # ---------
 ## on macOS add zfz to the PATH
 if [ `uname -s` == "Darwin" ] && [[ ! "$PATH" == */usr/local/opt/fzf/bin* ]]; then
-  export PATH="$PATH:/usr/local/opt/fzf/bin"
+  export PATH="/usr/local/opt/fzf/bin:$PATH"
 fi
 
 # Auto-completion
