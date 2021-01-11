@@ -1,32 +1,45 @@
 # Use GNU Tools over BSD
-#PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-#MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-#PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"
-#MANPATH="/usr/local/opt/findutils/libexec/gnuman:$MANPATH"
+#if [ -d /usr/local/opt/coreutils/libexec ] && [[ ! "$PATH" == */usr/local/opt/coreutils/libexec/gnubin* ]]; then
+#  PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+#  MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+#fi
+if [ -d /usr/local/opt/findutils/libexec ] && [[ ! "$PATH" == */usr/local/opt/findutils/libexec/gnubin* ]]; then
+PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"
+MANPATH="/usr/local/opt/findutils/libexec/gnuman:$MANPATH"
+fi
+if [ -d /usr/local/opt/grep/libexec ] && [[ ! "$PATH" == */usr/local/opt/grep/libexec/gnubin* ]]; then
 PATH="/usr/local/opt/grep/libexec/gnubin:$PATH"
 MANPATH="/usr/local/opt/grep/libexec/gnuman:$MANPATH"
+fi
+if [ -d /usr/local/opt/gnu-sed/libexec ] && [[ ! "$PATH" == */usr/local/opt/gnu-sed/libexec/gnubin* ]]; then
 PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 MANPATH="/usr/local/opt/gnu-sed/libexec/gnuman:$MANPATH"
+fi
+if [ -d /usr/local/opt/gnu-tar/libexec ] && [[ ! "$PATH" == */usr/local/opt/gnu-tar/libexec/gnubin* ]]; then
 PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"
 MANPATH="/usr/local/opt/gnu-tar/libexec/gnuman:$MANPATH"
+fi
+if [ -d /usr/local/opt/gnu-getopt/libexec ] && [[ ! "$PATH" == */usr/local/opt/gnu-getopt/libexec/gnubin* ]]; then
 PATH="/usr/local/opt/gnu-getopt/bin:$PATH"
 MANPATH="/usr/local/opt/gnu-getopt/libexec/gnuman:$MANPATH"
+fi
 
 # Add Go to path
-if command -v go &>/dev/null; then
-  PATH="$(go env GOPATH)/bin:$PATH:"
+if command -v go &>/dev/null && [[ ! "$PATH" == *$(go env GOPATH)/bin* ]]; then
+  PATH="$(go env GOPATH)/bin:$PATH"
 fi
 
 # Add Rust to path
-if comman -v rustup &>/dev/null; then
+if [ -d ~/.cargo ]; then
   source "$HOME/.cargo/env"
 fi
 
-if [ -d ${KREW_ROOT:-$HOME/.krew}/bin ]; then 
+# Add Krew to path
+if [ -d ${KREW_ROOT:-$HOME/.krew}/bin ] && [[ ! "$PATH" == *$HOME/.krew/bin* ]]; then 
   PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 fi
 
 # Add home bin to path
-if [ -d ~/bin ]; then
+if [ -d ~/bin ] && [[ ! "$PATH" == *~/bin* ]]; then
   PATH="~/bin:$PATH"
 fi
