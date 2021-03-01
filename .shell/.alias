@@ -44,6 +44,12 @@ alias kd='kubectl describe'
 alias kl='kubectl logs'
 
 ## Prunes all duplicates from history
-history_prune(){
+history-prune(){
   tac "$HISTFILE" | awk '!x[$0]++' > /tmp/history && tac /tmp/history > "$HISTFILE" && rm /tmp/history
+}
+history-top(){
+  history | awk '{print $2;}' | sort | uniq -c | sort -rn | head -10
+}
+history-tops(){
+  history | sed -e 's/ *[0-9][0-9]* *//' | sort | uniq -c | sort -rn | head -10
 }
