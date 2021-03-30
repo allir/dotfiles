@@ -40,6 +40,6 @@ if [ -d ${KREW_ROOT:-$HOME/.krew}/bin ] && [[ ! "$PATH" == *$HOME/.krew/bin* ]];
 fi
 
 # Add home bin to path
-if [ -d ~/bin ] && [[ ! "$PATH" == *~/bin* ]]; then
-  PATH="~/bin:$PATH"
+if [ -d ${HOME}/bin ] && [[ ! "$PATH" == *${HOME}/bin* ]]; then
+  PATH="${HOME}/bin:$PATH"
 fi
