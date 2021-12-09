@@ -1,8 +1,8 @@
 # Use GNU Tools over BSD
-#if [ -d /usr/local/opt/coreutils/libexec ] && [[ ! "$PATH" == */usr/local/opt/coreutils/libexec/gnubin* ]]; then
-#  PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-#  MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-#fi
+if [ -d /usr/local/opt/coreutils/libexec ] && [[ ! "$PATH" == */usr/local/opt/coreutils/libexec/gnubin* ]]; then
+  PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+  MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+fi
 if [ -d /usr/local/opt/findutils/libexec ] && [[ ! "$PATH" == */usr/local/opt/findutils/libexec/gnubin* ]]; then
 PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"
 MANPATH="/usr/local/opt/findutils/libexec/gnuman:$MANPATH"
