@@ -1,8 +1,16 @@
-# Use GNU Tools over BSD
-if [ -d /usr/local/opt/coreutils/libexec ] && [[ ! "$PATH" == */usr/local/opt/coreutils/libexec/gnubin* ]]; then
-  PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-  MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+# MacOS path_helper reorders the PATH when running a login shell, for example when using TMUX.
+# To make sure the path is correctly ordered if the path_helper exists we clear the path and
+# run it again for correct order.
+if [ -x /usr/libexec/path_helper ]; then
+    PATH=""
+    eval `/usr/libexec/path_helper -s`
 fi
+
+# Use GNU Tools over BSD
+#if [ -d /usr/local/opt/coreutils/libexec ] && [[ ! "$PATH" == */usr/local/opt/coreutils/libexec/gnubin* ]]; then
+#  PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+#  MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+#qq:qfi
 if [ -d /usr/local/opt/findutils/libexec ] && [[ ! "$PATH" == */usr/local/opt/findutils/libexec/gnubin* ]]; then
 PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"
 MANPATH="/usr/local/opt/findutils/libexec/gnuman:$MANPATH"

@@ -1,5 +1,5 @@
 # Aliases
-source ~/.shell/.alias
+source ~/.shell/alias
 
 # bash Completions
 [ -r '/usr/local/etc/profile.d/bash_completion.sh' ] && source '/usr/local/etc/profile.d/bash_completion.sh'
@@ -17,3 +17,5 @@ if [ -r '/usr/local/opt/bash-git-prompt/share/gitprompt.sh' ]; then
   GIT_PROMPT_THEME_FILE=~/.git-prompt/git-prompt-colors
   source '/usr/local/opt/bash-git-prompt/share/gitprompt.sh'
 fi
+
+[ -f ~/.bashrc.local ] && source ~/.bashrc.local
