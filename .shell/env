@@ -5,6 +5,7 @@ export LANG=en_US.UTF-8
 
 # History Management
 export SHELL_SESSION_HISTORY=0
+export HISTFILE=~/.shell_history
 export HISTCONTROL=ignoreboth:erasedups
 export HISTFILESIZE=25000
 export HISTSIZE=25000

@@ -15,7 +15,7 @@ if command -v fzf &>/dev/null; then
 fi
 
 # Prompt
-source "/usr/local/opt/zsh-git-prompt/zshrc.sh"
-PROMPT='%F{cyan}%n%f@%F{blue}%B%m%b%f:%2~ %# '
+PROMPT='%(?.%F{green}✔%f.%F{red}✘ %?%f) %(!.%F{red}%n%f.%F{cyan}%n%f)@%F{blue}%B%m%b%f:%2~ %# '
 
+# Local additions
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local

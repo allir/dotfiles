@@ -18,4 +18,5 @@ if [ -r '/usr/local/opt/bash-git-prompt/share/gitprompt.sh' ]; then
   source '/usr/local/opt/bash-git-prompt/share/gitprompt.sh'
 fi
 
+# Local additions
 [ -f ~/.bashrc.local ] && source ~/.bashrc.local
