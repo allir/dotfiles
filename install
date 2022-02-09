@@ -14,6 +14,7 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 case `uname -s` in
   "Darwin" )
+    echo "Starting Installation (Darwin)..."
     # Install xcode command line tools
     echo -e "Setting up xcode command line tools"
     check="$(xcode-select --install 2>&1)" || true
@@ -53,8 +54,13 @@ case `uname -s` in
     echo -e "For example: \"chsh -s /usr/local/bin/bash\" or \"chsh -s /usr/local/bin/zsh\""
   ;;
   "Linux" )
-  # Link dotfiles
+    echo "Starting Installation (Linux)..."
+    # Link dotfiles
     echo -e "Setting up symlinks"
     ${SCRIPTPATH}/symlink-setup.sh
   ;;
 esac
+
+# Create user bin folder and copy scripts
+mkdir -p ~/bin
+cp ${SCRIPTPATH}/scripts/* ~/bin/
