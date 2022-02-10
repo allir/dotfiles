@@ -1,6 +1,9 @@
 # Aliases
 source ~/.shell/alias
 
+# HISTFILE variable from .zprofile gets overwriten it seems so we need to set it in .zshrc
+export HISTFILE=~/.shell_history
+
 # zsh Completions
 if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
