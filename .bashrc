@@ -2,7 +2,9 @@
 source ~/.shell/alias
 
 # bash Completions
-[ -r '/usr/local/etc/profile.d/bash_completion.sh' ] && source '/usr/local/etc/profile.d/bash_completion.sh'
+if [ -r '/usr/local/etc/profile.d/bash_completion.sh' ]; then
+  source '/usr/local/etc/profile.d/bash_completion.sh'
+fi
 
 # Fuzzy Find
 if command -v fzf &>/dev/null; then
@@ -19,4 +21,6 @@ if [ -r '/usr/local/opt/bash-git-prompt/share/gitprompt.sh' ]; then
 fi
 
 # Local additions
-[ -f ~/.bashrc.local ] && source ~/.bashrc.local
+if [ -r ~/.bashrc.local ]; then
+  source ~/.bashrc.local
+fi

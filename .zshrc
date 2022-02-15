@@ -21,4 +21,6 @@ fi
 PROMPT='%(?.%F{green}✔%f.%F{red}✘ %?%f) %(!.%F{red}%n%f.%F{cyan}%n%f)@%F{blue}%B%m%b%f:%2~ %# '
 
 # Local additions
-[ -f ~/.zshrc.local ] && source ~/.zshrc.local
+if [ -r ~/.zshrc.local ]; then
+  source ~/.zshrc.local
+fi
