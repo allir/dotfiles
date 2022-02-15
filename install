@@ -39,8 +39,7 @@ case `uname -s` in
       echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells > /dev/null
       sudo chmod -R 755 /usr/local/share/zsh
     fi
-    # chsh prompts for password?
-    #chsh -s /usr/local/bin/bash
+    sudo chsh -s /usr/local/bin/bash $(whoami)
 
     # Link dotfiles
     echo -e "Setting up symlinks"
@@ -49,9 +48,6 @@ case `uname -s` in
     # Configure iTerm2
     echo -e "Configuring iTerm2"
     ${SCRIPTPATH}/.iterm/iterm-setup.sh
-
-    echo -e "\n\nNote that the default shell has not been updated. Run \"chsh -s /path/to/shell\" to change it."
-    echo -e "For example: \"chsh -s /usr/local/bin/bash\" or \"chsh -s /usr/local/bin/zsh\""
   ;;
   "Linux" )
     echo "Starting Installation (Linux)..."
