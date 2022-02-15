@@ -9,7 +9,7 @@ SCRIPTPATH=$( dirname ${SCRIPT} )
 
 # Setup Homebrew
 echo -e "Installing Homebrew"
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" </dev/null
 brew analytics off
 
 # Install brews/casks

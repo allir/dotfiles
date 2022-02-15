@@ -41,8 +41,6 @@ brew "screen"
 
 # Docker / Kubernetes
 cask "docker"
-brew "docker-completion"
-brew "docker-compose-completion"
 brew "kubernetes-cli"
 brew "kind"
 brew "krew"
