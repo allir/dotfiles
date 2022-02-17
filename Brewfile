@@ -4,6 +4,7 @@ tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"
 tap "homebrew/bundle"
+tap "romkatv/gitstatus"
 
 # Fonts
 cask "font-fira-code"
@@ -16,9 +17,9 @@ cask "iterm2"
 # Shell
 brew "bash"
 brew "bash-completion"
-brew "bash-git-prompt"
 brew "zsh"
 brew "zsh-completions"
+brew "gitstatus"
 
 # GNU Tools
 brew "coreutils"

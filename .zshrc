@@ -18,7 +18,12 @@ if command -v fzf &>/dev/null; then
 fi
 
 # Prompt
-PROMPT='%(?.%F{green}✔%f.%F{red}✘ %?%f) %(!.%F{red}%n%f.%F{cyan}%n%f)@%F{blue}%B%m%b%f:%2~ %# '
+if [ -r /usr/local/opt/gitstatus/gitstatus.prompt.zsh ];then
+  source /usr/local/opt/gitstatus/gitstatus.prompt.zsh
+  PROMPT='%(?..%F{red}✘ %?%f'$'\n'')%(!.%F{red}%n%f.%F{cyan}%n%f)@%F{blue}%B%m%b%f:%2~${GITSTATUS_PROMPT:+ %129F⌥(%f$GITSTATUS_PROMPT%129F)%f} %# '
+else
+  PROMPT='%(?..%F{red}✘ %?%f'$'\n'')%(!.%F{red}%n%f.%F{cyan}%n%f)@%F{blue}%B%m%b%f:%2~ %# '
+fi
 
 # Local additions
 if [ -r ~/.zshrc.local ]; then
