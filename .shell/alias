@@ -17,6 +17,9 @@ if command -v prettyping &>/dev/null; then
   alias ping='prettyping --nolegend'
 fi
 
+# Homebrew
+alias brewdeps="brew leaves | xargs brew deps --include-build --tree"
+
 # Python
 alias ve='python3 -m venv ./venv'
 alias va='source ./venv/bin/activate'
