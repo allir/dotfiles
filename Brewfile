@@ -43,11 +43,11 @@ brew "screen"
 # Docker / Kubernetes
 cask "docker"
 brew "kubernetes-cli"
+brew "minikube"
 brew "kind"
 brew "krew"
 brew "helm"
 brew "kustomize"
-brew "stern"
 
 # Browsers
 cask "firefox"
