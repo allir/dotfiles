@@ -16,11 +16,11 @@ case `uname -s` in
   "Darwin" )
     echo "Starting Installation (Darwin)..."
     # Install xcode command line tools
-    echo -e "Setting up xcode command line tools"
+    echo "Setting up xcode command line tools"
     check="$(xcode-select --install 2>&1)" || true
     str="xcode-select: note: install requested for command line developer tools"
     if [[ "$check" == "$str" ]]; then
-      echo -e "Waiting for xcode command line tools installation to finish..."
+      echo "Waiting for xcode command line tools installation to finish..."
     fi
     while [[ "$check" == "$str" ]]; do
       check="$(xcode-\select --install 2>&1)" || true
@@ -28,7 +28,7 @@ case `uname -s` in
     done
 
     # Install Homebrew, Formulae & Casks
-    echo -e "Setting up Homebrew + Brewfile bundle..."
+    echo "Setting up Homebrew + Brewfile bundle..."
     ${SCRIPTPATH}/homebrew-setup.sh
     if ! ( grep "/usr/local/bin/bash" /etc/shells &>/dev/null ); then
       echo "Adding bash to /etc/shells"
@@ -42,17 +42,17 @@ case `uname -s` in
     sudo chsh -s /usr/local/bin/bash $(whoami)
 
     # Link dotfiles
-    echo -e "Setting up symlinks"
+    echo "Setting up symlinks"
     ${SCRIPTPATH}/symlink-setup.sh
 
     # Configure iTerm2
-    echo -e "Configuring iTerm2"
+    echo "Configuring iTerm2"
     ${SCRIPTPATH}/.iterm/iterm-setup.sh
   ;;
   "Linux" )
     echo "Starting Installation (Linux)..."
     # Link dotfiles
-    echo -e "Setting up symlinks"
+    echo "Setting up symlinks"
     ${SCRIPTPATH}/symlink-setup.sh
   ;;
 esac

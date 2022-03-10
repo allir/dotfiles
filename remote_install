@@ -9,11 +9,11 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 case `uname -s` in
   "Darwin" )
     # Install xcode command line tools (includes git)
-    echo -e "Setting up xcode command line tools..."
+    echo "Setting up xcode command line tools..."
     check="$(xcode-select --install 2>&1)" || true
     str="xcode-select: note: install requested for command line developer tools"
     if [[ "$check" == "$str" ]]; then
-      echo -e "Waiting for xcode command line tools installation to finish..."
+      echo "Waiting for xcode command line tools installation to finish..."
     fi
     while [[ "$check" == "$str" ]]; do
       check="$(xcode-\select --install 2>&1)" || true
@@ -27,10 +27,10 @@ case `uname -s` in
 esac
 
 # Clone the repository
-echo -e "Clone the dotfiles repository..."
+echo "Clone the dotfiles repository..."
 cd
 git clone https://github.com/allir/dotfiles.git .dotfiles || true
 
 # Run setup
-echo -e "Run the installation script..."
+echo "Run the installation script..."
 .dotfiles/install
