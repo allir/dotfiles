@@ -18,7 +18,8 @@ if command -v prettyping &>/dev/null; then
 fi
 
 # Homebrew
-alias brewdeps="brew leaves | xargs brew deps --include-build --tree"
+alias brewdeps="brew leaves | xargs brew deps --installed --for-each"
+alias brewtree="brew leaves | xargs brew deps --installed --tree"
 
 # Python
 alias ve='python3 -m venv ./venv'
