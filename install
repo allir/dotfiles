@@ -48,6 +48,10 @@ case `uname -s` in
     # Configure iTerm2
     echo "Configuring iTerm2"
     ${SCRIPTPATH}/.iterm/iterm-setup.sh
+
+    # Configure Dock
+    echo "Configuring macOS Dock"
+    ${SCRIPTPATH}/macOS/dock.sh
   ;;
   "Linux" )
     echo "Starting Installation (Linux)..."

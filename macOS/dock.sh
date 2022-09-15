@@ -80,6 +80,9 @@ defaults write com.apple.dock persistent-apps -array \
     "$(dock_item /System/Applications/Contacts.app)" \
     "$(dock_item /System/Applications/Notes.app)" \
     "$(dock_item /System/Applications/Reminders.app)" \
+    "$(dock_item /Applications/Pages.app)" \
+    "$(dock_item /Applications/Numbers.app)" \
+    "$(dock_item /Applications/Keynote.app)" \
     "$(dock_item /Applications/Spotify.app)" \
     "$(dock_item /Applications/Visual\ Studio\ Code.app)" \
     "$(dock_item /Applications/Slack.app)" \
