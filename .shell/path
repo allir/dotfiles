@@ -6,30 +6,35 @@ if [ -x /usr/libexec/path_helper ]; then
     eval `/usr/libexec/path_helper -s`
 fi
 
+# Homebrew
+if [ -f /opt/homebrew/bin/brew ] || [ -f /usr/local/bin/brew ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv 2>/dev/null)" && eval "$(/usr/local/bin/brew shellenv 2>/dev/null)"
+fi
+
 # Use GNU Tools over BSD
-#if [ -d /usr/local/opt/coreutils/libexec ] && [[ ! "$PATH" == */usr/local/opt/coreutils/libexec/gnubin* ]]; then
-#  PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-#  MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-#qq:qfi
-if [ -d /usr/local/opt/findutils/libexec ] && [[ ! "$PATH" == */usr/local/opt/findutils/libexec/gnubin* ]]; then
-PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"
-MANPATH="/usr/local/opt/findutils/libexec/gnuman:$MANPATH"
+#if [ -d $HOMEBREW_PREFIX/opt/coreutils/libexec ] && [[ ! "$PATH" == *$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin* ]]; then
+#  PATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:$PATH"
+#  MANPATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnuman:$MANPATH"
+#fi
+if [ -d $HOMEBREW_PREFIX/opt/findutils/libexec ] && [[ ! "$PATH" == *$HOMEBREW_PREFIX/opt/findutils/libexec/gnubin* ]]; then
+PATH="$HOMEBREW_PREFIX/opt/findutils/libexec/gnubin:$PATH"
+MANPATH="$HOMEBREW_PREFIX/opt/findutils/libexec/gnuman:$MANPATH"
 fi
-if [ -d /usr/local/opt/grep/libexec ] && [[ ! "$PATH" == */usr/local/opt/grep/libexec/gnubin* ]]; then
-PATH="/usr/local/opt/grep/libexec/gnubin:$PATH"
-MANPATH="/usr/local/opt/grep/libexec/gnuman:$MANPATH"
+if [ -d $HOMEBREW_PREFIX/opt/grep/libexec ] && [[ ! "$PATH" == *$HOMEBREW_PREFIX/opt/grep/libexec/gnubin* ]]; then
+PATH="$HOMEBREW_PREFIX/opt/grep/libexec/gnubin:$PATH"
+MANPATH="$HOMEBREW_PREFIX/opt/grep/libexec/gnuman:$MANPATH"
 fi
-if [ -d /usr/local/opt/gnu-sed/libexec ] && [[ ! "$PATH" == */usr/local/opt/gnu-sed/libexec/gnubin* ]]; then
-PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
-MANPATH="/usr/local/opt/gnu-sed/libexec/gnuman:$MANPATH"
+if [ -d $HOMEBREW_PREFIX/opt/gnu-sed/libexec ] && [[ ! "$PATH" == *$HOMEBREW_PREFIX/opt/gnu-sed/libexec/gnubin* ]]; then
+PATH="$HOMEBREW_PREFIX/opt/gnu-sed/libexec/gnubin:$PATH"
+MANPATH="$HOMEBREW_PREFIX/opt/gnu-sed/libexec/gnuman:$MANPATH"
 fi
-if [ -d /usr/local/opt/gnu-tar/libexec ] && [[ ! "$PATH" == */usr/local/opt/gnu-tar/libexec/gnubin* ]]; then
-PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"
-MANPATH="/usr/local/opt/gnu-tar/libexec/gnuman:$MANPATH"
+if [ -d $HOMEBREW_PREFIX/opt/gnu-tar/libexec ] && [[ ! "$PATH" == *$HOMEBREW_PREFIX/opt/gnu-tar/libexec/gnubin* ]]; then
+PATH="$HOMEBREW_PREFIX/opt/gnu-tar/libexec/gnubin:$PATH"
+MANPATH="$HOMEBREW_PREFIX/opt/gnu-tar/libexec/gnuman:$MANPATH"
 fi
-if [ -d /usr/local/opt/gnu-getopt/libexec ] && [[ ! "$PATH" == */usr/local/opt/gnu-getopt/libexec/gnubin* ]]; then
-PATH="/usr/local/opt/gnu-getopt/bin:$PATH"
-MANPATH="/usr/local/opt/gnu-getopt/libexec/gnuman:$MANPATH"
+if [ -d $HOMEBREW_PREFIX/opt/gnu-getopt/libexec ] && [[ ! "$PATH" == *$HOMEBREW_PREFIX/opt/gnu-getopt/libexec/gnubin* ]]; then
+PATH="$HOMEBREW_PREFIX/opt/gnu-getopt/bin:$PATH"
+MANPATH="$HOMEBREW_PREFIX/opt/gnu-getopt/libexec/gnuman:$MANPATH"
 fi
 
 # Add Go to path

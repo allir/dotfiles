@@ -30,16 +30,16 @@ case `uname -s` in
     # Install Homebrew, Formulae & Casks
     echo "Setting up Homebrew + Brewfile bundle..."
     ${SCRIPTPATH}/homebrew-setup.sh
-    if ! ( grep "/usr/local/bin/bash" /etc/shells &>/dev/null ); then
+    if ! ( grep "$HOMEBREW_PREFIX/bin/bash" /etc/shells &>/dev/null ); then
       echo "Adding bash to /etc/shells"
-      echo "/usr/local/bin/bash" | sudo tee -a /etc/shells > /dev/null
+      echo "$HOMEBREW_PREFIX/bin/bash" | sudo tee -a /etc/shells > /dev/null
     fi
-    if ! ( grep "/usr/local/bin/zsh" /etc/shells &>/dev/null ); then
+    if ! ( grep "$HOMEBREW_PREFIX/bin/zsh" /etc/shells &>/dev/null ); then
       echo "Adding zsh to /etc/shells"
-      echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells > /dev/null
-      sudo chmod -R 755 /usr/local/share/zsh
+      echo "$HOMEBREW_PREFIX/bin/zsh" | sudo tee -a /etc/shells > /dev/null
+      sudo chmod -R 755 $HOMEBREW_PREFIX/share/zsh &>/dev/null
     fi
-    sudo chsh -s /usr/local/bin/bash $(whoami)
+    sudo chsh -s $HOMEBREW_PREFIX/bin/zsh $(whoami)
 
     # Link dotfiles
     echo "Setting up symlinks"

@@ -15,8 +15,8 @@ if command -v fzf &>/dev/null; then
 fi
 
 # Prompt
-if [ -r /usr/local/opt/gitstatus/gitstatus.prompt.zsh ];then
-  source /usr/local/opt/gitstatus/gitstatus.prompt.zsh
+if [ -r "$HOMEBREW_PREFIX/opt/gitstatus/gitstatus.prompt.zsh" ];then
+  source "$HOMEBREW_PREFIX/opt/gitstatus/gitstatus.prompt.zsh"
   PROMPT='%(?..%F{red}✘ %?%f'$'\n'')%(!.%F{red}%n%f.%F{cyan}%n%f)@%F{blue}%B%m%b%f:%2~${GITSTATUS_PROMPT:+ %129F⌥(%f$GITSTATUS_PROMPT%129F)%f} %# '
 else
   PROMPT='%(?..%F{red}✘ %?%f'$'\n'')%(!.%F{red}%n%f.%F{cyan}%n%f)@%F{blue}%B%m%b%f:%2~ %# '

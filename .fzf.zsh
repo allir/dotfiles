@@ -2,15 +2,15 @@
 # ---------
 case `uname -s` in
   "Darwin" )
-    if [[ ! "$PATH" == */usr/local/opt/fzf/bin* ]]; then
-      export PATH="/usr/local/opt/fzf/bin:$PATH"
+    if [[ ! "$PATH" == *$HOMEBREW_PREFIX/opt/fzf/bin* ]]; then
+      export PATH="$HOMEBREW_PREFIX/opt/fzf/bin:$PATH"
     fi
     # Auto-completion
     # ---------------
-    [[ $- == *i* ]] && source "/usr/local/opt/fzf/shell/completion.zsh" 2> /dev/null
+    [[ $- == *i* ]] && source "$HOMEBREW_PREFIX/opt/fzf/shell/completion.zsh" 2> /dev/null
     # Key bindings
     # ------------
-    source "/usr/local/opt/fzf/shell/key-bindings.zsh"
+    source "$HOMEBREW_PREFIX/opt/fzf/shell/key-bindings.zsh"
     ;;
   
   "Linux" )
