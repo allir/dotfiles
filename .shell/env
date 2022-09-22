@@ -1,24 +1,18 @@
 # General
-export OS=`uname -s`
 export OWNER='Aðalsteinn Rúnarsson'
+export OS=`uname -s`
+export ARCH=`uname -m`
 export LANG=en_US.UTF-8
 
 # CLI Colors
 case "$OS" in
     "Darwin"|"FreeBSD" )
         export CLICOLOR=true
-        # ls colors
         export LSCOLORS=ExFxBxDxCxegedabagacad
-        ;;
-    "Linux" )
-        # ls colors
-        export LS_OPTS='--color=auto' 
-        alias  ls='ls ${LS_OPTS}'
-        ;;
-    * )
-        echo "Colors not implemented for $OS"
-        ;;
 esac
+# ls colors
+export LS_OPTS='--color=auto'
+alias  ls='ls ${LS_OPTS}'
 ## grep colors
 export GREP_OPTS="--color=auto"
 alias grep='grep ${GREP_OPTS}'

@@ -12,10 +12,10 @@ if [ -f /opt/homebrew/bin/brew ] || [ -f /usr/local/bin/brew ]; then
 fi
 
 # Use GNU Tools over BSD
-#if [ -d $HOMEBREW_PREFIX/opt/coreutils/libexec ] && [[ ! "$PATH" == *$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin* ]]; then
-#  PATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:$PATH"
-#  MANPATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnuman:$MANPATH"
-#fi
+if [ -d $HOMEBREW_PREFIX/opt/coreutils/libexec ] && [[ ! "$PATH" == *$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin* ]]; then
+  PATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:$PATH"
+  MANPATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnuman:$MANPATH"
+fi
 if [ -d $HOMEBREW_PREFIX/opt/findutils/libexec ] && [[ ! "$PATH" == *$HOMEBREW_PREFIX/opt/findutils/libexec/gnubin* ]]; then
 PATH="$HOMEBREW_PREFIX/opt/findutils/libexec/gnubin:$PATH"
 MANPATH="$HOMEBREW_PREFIX/opt/findutils/libexec/gnuman:$MANPATH"
