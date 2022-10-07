@@ -45,6 +45,9 @@ case `uname -s` in
     echo "Setting up symlinks"
     ${SCRIPTPATH}/symlink-setup.sh
 
+    echo "Setting up SSH config"
+    ${SCRIPTPATH}/ssh-setup.sh
+
     # Configure iTerm2
     echo "Configuring iTerm2"
     ${SCRIPTPATH}/.iterm/iterm-setup.sh
