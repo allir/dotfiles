@@ -21,6 +21,13 @@ else
   PS1='\e[0;36m\u\e[0m@\e[0;34m\h\e[0m \w \$ '
 fi
 
+# Includes from .bashrc.d 
+if [ -d ${HOME}/.bashrc.d ]; then
+  for file in ~/.bashrc.d/*.bashrc; do
+    source "${file}"
+  done
+fi
+
 # Local additions
 if [ -r ~/.bashrc.local ]; then
   source ~/.bashrc.local

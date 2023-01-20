@@ -22,6 +22,13 @@ else
   PROMPT='%(?..%F{red}✘ %?%f'$'\n'')%(!.%F{red}%n%f.%F{cyan}%n%f)@%F{blue}%B%m%b%f:%2~ %# '
 fi
 
+# Includes from .zshrc.d 
+if [ -d ${HOME}/.zshrc.d ]; then
+  for file in ~/.zshrc.d/*.zshrc; do
+    source "${file}"
+  done
+fi
+
 # Local additions
 if [ -r ~/.zshrc.local ]; then
   source ~/.zshrc.local

@@ -4,18 +4,24 @@ export OS=`uname -s`
 export ARCH=`uname -m`
 export LANG=en_US.UTF-8
 
+## Editor
+export EDITOR=vim
+
 # CLI Colors
 case "$OS" in
     "Darwin"|"FreeBSD" )
         export CLICOLOR=true
         export LSCOLORS=ExFxBxDxCxegedabagacad
 esac
+
 # ls colors
 export LS_OPTS='--color=auto'
 alias  ls='ls ${LS_OPTS}'
+
 ## grep colors
 export GREP_OPTS="--color=auto"
 alias grep='grep ${GREP_OPTS}'
+
 ## less colors
 export LESS="--RAW-CONTROL-CHARS"
 ## Use colors for less, man, etc.
