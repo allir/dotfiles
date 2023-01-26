@@ -1,7 +1,7 @@
 # Setup fzf
 # ---------
 ## on macOS add zfz to the PATH
-if [ `uname -s` == "Darwin" ] && [[ ! "$PATH" == *$HOMEBREW_PREFIX/opt/fzf/bin* ]]; then
+if [[ `uname -s` == "Darwin" ]] && [[ ! "$PATH" == *$HOMEBREW_PREFIX/opt/fzf/bin* ]]; then
   export PATH="$HOMEBREW_PREFIX/opt/fzf/bin:$PATH"
 fi
 

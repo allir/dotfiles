@@ -1,6 +1,9 @@
 # Aliases
 source ~/.shell/alias
 
+# Set EMACS mode
+set -o emacs
+
 # zsh Completions
 if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
