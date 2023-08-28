@@ -6,24 +6,25 @@ sudo -v
 # Keep-alive: update existing `sudo` time stamp until finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-case `uname -s` in
-  "Darwin" )
-    # Install xcode command line tools (includes git)
-    echo "Setting up xcode command line tools..."
-    check="$(xcode-select --install 2>&1)" || true
-    str="xcode-select: note: install requested for command line developer tools"
-    if [[ "$check" == "$str" ]]; then
-      echo "Waiting for xcode command line tools installation to finish..."
-    fi
-    while [[ "$check" == "$str" ]]; do
-      check="$(xcode-\select --install 2>&1)" || true
-      sleep 1
-    done    
-    ;;
-  "Linux" )
-    sudo apt-get -qq update
-    sudo apt-get -qq -y install git-all
-    ;;
+case $(uname -s) in
+    "Darwin" )
+        # Install xcode command line tools (includes git)
+        echo "Setting up xcode command line tools..."
+        check="$(xcode-select --install 2>&1)" || true
+        str="xcode-select: note: install requested for command line developer tools"
+        if [[ "$check" == "$str" ]]; then
+          echo "Waiting for xcode command line tools installation to finish..."
+        fi
+        while [[ "$check" == "$str" ]]; do
+          check="$(xcode-select --install 2>&1)" || true
+          sleep 1
+        done    
+        ;;
+
+    "Linux" )
+        sudo apt-get -qq update
+        sudo apt-get -qq -y install git-all
+        ;;
 esac
 
 # Clone the repository

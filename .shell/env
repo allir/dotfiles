@@ -1,10 +1,11 @@
 # General
-export OWNER='Aðalsteinn Rúnarsson'
-export OS=`uname -s`
-export ARCH=`uname -m`
-export LANG=en_US.UTF-8
+OWNER='Aðalsteinn Rúnarsson'
+OS=`uname -s`
+ARCH=`uname -m`
+LANG=en_US.UTF-8
+export OWNER OS ARCH LANG
 
-## Editor
+# Editor
 export EDITOR=vim
 
 # CLI Colors
@@ -14,7 +15,7 @@ case "$OS" in
         export LSCOLORS=ExFxBxDxCxegedabagacad
 esac
 
-# ls colors
+## ls colors
 export LS_OPTS='--color=auto'
 alias  ls='ls ${LS_OPTS}'
 
@@ -25,4 +26,4 @@ alias grep='grep ${GREP_OPTS}'
 ## less colors
 export LESS="--RAW-CONTROL-CHARS"
 ## Use colors for less, man, etc.
-[[ -f ~/.LESS_TERMCAP ]] && . ~/.LESS_TERMCAP
+[[ -f ~/.LESS_TERMCAP ]] && source ~/.LESS_TERMCAP

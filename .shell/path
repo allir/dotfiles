@@ -3,56 +3,56 @@
 # run it again for correct order.
 if [ -x /usr/libexec/path_helper ]; then
     PATH=""
-    eval `/usr/libexec/path_helper -s`
+    eval "`/usr/libexec/path_helper -s`"
 fi
 
 # Homebrew
 if [ -f /opt/homebrew/bin/brew ] || [ -f /usr/local/bin/brew ]; then
-  eval "$(/opt/homebrew/bin/brew shellenv 2>/dev/null)" && eval "$(/usr/local/bin/brew shellenv 2>/dev/null)"
+    eval "$(/opt/homebrew/bin/brew shellenv 2>/dev/null)" && eval "$(/usr/local/bin/brew shellenv 2>/dev/null)"
 fi
 
 # Use GNU Tools over BSD
-if [ -d $HOMEBREW_PREFIX/opt/coreutils/libexec ] && [[ ! "$PATH" == *$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin* ]]; then
-  PATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:$PATH"
-  MANPATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnuman:$MANPATH"
+if [ -d "${HOMEBREW_PREFIX}/opt/coreutils/libexec" ] && [[ ! "$PATH" == *${HOMEBREW_PREFIX}/opt/coreutils/libexec/gnubin* ]]; then
+    PATH="${HOMEBREW_PREFIX}/opt/coreutils/libexec/gnubin:$PATH"
+    MANPATH="${HOMEBREW_PREFIX}/opt/coreutils/libexec/gnuman:$MANPATH"
 fi
-if [ -d $HOMEBREW_PREFIX/opt/findutils/libexec ] && [[ ! "$PATH" == *$HOMEBREW_PREFIX/opt/findutils/libexec/gnubin* ]]; then
-PATH="$HOMEBREW_PREFIX/opt/findutils/libexec/gnubin:$PATH"
-MANPATH="$HOMEBREW_PREFIX/opt/findutils/libexec/gnuman:$MANPATH"
+if [ -d "${HOMEBREW_PREFIX}/opt/findutils/libexec" ] && [[ ! "$PATH" == *${HOMEBREW_PREFIX}/opt/findutils/libexec/gnubin* ]]; then
+    PATH="${HOMEBREW_PREFIX}/opt/findutils/libexec/gnubin:$PATH"
+    MANPATH="${HOMEBREW_PREFIX}/opt/findutils/libexec/gnuman:$MANPATH"
 fi
-if [ -d $HOMEBREW_PREFIX/opt/grep/libexec ] && [[ ! "$PATH" == *$HOMEBREW_PREFIX/opt/grep/libexec/gnubin* ]]; then
-PATH="$HOMEBREW_PREFIX/opt/grep/libexec/gnubin:$PATH"
-MANPATH="$HOMEBREW_PREFIX/opt/grep/libexec/gnuman:$MANPATH"
+if [ -d "${HOMEBREW_PREFIX}/opt/grep/libexec" ] && [[ ! "$PATH" == *${HOMEBREW_PREFIX}/opt/grep/libexec/gnubin* ]]; then
+    PATH="${HOMEBREW_PREFIX}/opt/grep/libexec/gnubin:$PATH"
+    MANPATH="${HOMEBREW_PREFIX}/opt/grep/libexec/gnuman:$MANPATH"
 fi
-if [ -d $HOMEBREW_PREFIX/opt/gnu-sed/libexec ] && [[ ! "$PATH" == *$HOMEBREW_PREFIX/opt/gnu-sed/libexec/gnubin* ]]; then
-PATH="$HOMEBREW_PREFIX/opt/gnu-sed/libexec/gnubin:$PATH"
-MANPATH="$HOMEBREW_PREFIX/opt/gnu-sed/libexec/gnuman:$MANPATH"
+if [ -d "${HOMEBREW_PREFIX}/opt/gnu-sed/libexec" ] && [[ ! "$PATH" == *${HOMEBREW_PREFIX}/opt/gnu-sed/libexec/gnubin* ]]; then
+    PATH="${HOMEBREW_PREFIX}/opt/gnu-sed/libexec/gnubin:$PATH"
+    MANPATH="${HOMEBREW_PREFIX}/opt/gnu-sed/libexec/gnuman:$MANPATH"
 fi
-if [ -d $HOMEBREW_PREFIX/opt/gnu-tar/libexec ] && [[ ! "$PATH" == *$HOMEBREW_PREFIX/opt/gnu-tar/libexec/gnubin* ]]; then
-PATH="$HOMEBREW_PREFIX/opt/gnu-tar/libexec/gnubin:$PATH"
-MANPATH="$HOMEBREW_PREFIX/opt/gnu-tar/libexec/gnuman:$MANPATH"
+if [ -d "${HOMEBREW_PREFIX}/opt/gnu-tar/libexec" ] && [[ ! "$PATH" == *${HOMEBREW_PREFIX}/opt/gnu-tar/libexec/gnubin* ]]; then
+    PATH="${HOMEBREW_PREFIX}/opt/gnu-tar/libexec/gnubin:$PATH"
+    MANPATH="${HOMEBREW_PREFIX}/opt/gnu-tar/libexec/gnuman:$MANPATH"
 fi
-if [ -d $HOMEBREW_PREFIX/opt/gnu-getopt/libexec ] && [[ ! "$PATH" == *$HOMEBREW_PREFIX/opt/gnu-getopt/libexec/gnubin* ]]; then
-PATH="$HOMEBREW_PREFIX/opt/gnu-getopt/bin:$PATH"
-MANPATH="$HOMEBREW_PREFIX/opt/gnu-getopt/libexec/gnuman:$MANPATH"
+if [ -d "${HOMEBREW_PREFIX}/opt/gnu-getopt/libexec" ] && [[ ! "$PATH" == *${HOMEBREW_PREFIX}/opt/gnu-getopt/libexec/gnubin* ]]; then
+    PATH="${HOMEBREW_PREFIX}/opt/gnu-getopt/bin:$PATH"
+    MANPATH="${HOMEBREW_PREFIX}/opt/gnu-getopt/libexec/gnuman:$MANPATH"
 fi
 
 # Add Go to path
 if command -v go &>/dev/null && [[ ! "$PATH" == *$(go env GOPATH)/bin* ]]; then
-  PATH="$(go env GOPATH)/bin:$PATH"
+    PATH="$(go env GOPATH)/bin:$PATH"
 fi
 
 # Add Rust to path
 if [ -d ~/.cargo ]; then
-  source "$HOME/.cargo/env"
+    source "$HOME/.cargo/env"
 fi
 
 # Add Krew to path
-if [ -d ${KREW_ROOT:-$HOME/.krew}/bin ] && [[ ! "$PATH" == *$HOME/.krew/bin* ]]; then 
-  PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+if [ -d "${KREW_ROOT:-$HOME/.krew}/bin" ] && [[ ! "$PATH" == *$HOME/.krew/bin* ]]; then 
+    PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 fi
 
 # Add home bin to path
-if [ -d ${HOME}/bin ] && [[ ! "$PATH" == *${HOME}/bin* ]]; then
-  PATH="${HOME}/bin:$PATH"
+if [ -d "${HOME}/bin" ] && [[ ! "$PATH" == *${HOME}/bin* ]]; then
+    PATH="${HOME}/bin:$PATH"
 fi

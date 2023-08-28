@@ -14,5 +14,5 @@ PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$';'}history -a; history -c; hi
 
 # Source .bashrc
 if [ -f $HOME/.bashrc ]; then
-  source $HOME/.bashrc
+    source $HOME/.bashrc
 fi

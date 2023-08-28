@@ -4,8 +4,8 @@ set -euo pipefail
 # This is pretty ugly, but it works on macOS without requiring coreutils for GNU readlink
 # Ideally this would be:
 # SCRIPT=$( readlink -f ${BASH_SOURCE[0]} )
-SCRIPT=$( cd "$(dirname ${BASH_SOURCE[0]})" &>/dev/null && pwd )/$( basename ${BASH_SOURCE[0]} )
-SCRIPTPATH=$( dirname ${SCRIPT} )
+SCRIPT=$( cd "$( dirname "${BASH_SOURCE[0]}" )" &>/dev/null && pwd )/$( basename "${BASH_SOURCE[0]}" )
+SCRIPTPATH=$( dirname "${SCRIPT}" )
 
 # Ask for the administrator password upfront
 sudo -v
@@ -13,57 +13,58 @@ sudo -v
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 case `uname -s` in
-  "Darwin" )
-    echo "Starting Installation (Darwin)..."
-    # Install xcode command line tools
-    echo "Setting up xcode command line tools"
-    check="$(xcode-select --install 2>&1)" || true
-    str="xcode-select: note: install requested for command line developer tools"
-    if [[ "$check" == "$str" ]]; then
-      echo "Waiting for xcode command line tools installation to finish..."
-    fi
-    while [[ "$check" == "$str" ]]; do
-      check="$(xcode-\select --install 2>&1)" || true
-      sleep 1
-    done
+    "Darwin" )
+        echo "Starting Installation (Darwin)..."
+        # Install xcode command line tools
+        echo "Setting up xcode command line tools"
+        check="$(xcode-select --install 2>&1)" || true
+        str="xcode-select: note: install requested for command line developer tools"
+        if [[ "$check" == "$str" ]]; then
+          echo "Waiting for xcode command line tools installation to finish..."
+        fi
+        while [[ "$check" == "$str" ]]; do
+          check="$(xcode-select --install 2>&1)" || true
+          sleep 1
+        done
 
-    # Install Homebrew, Formulae & Casks
-    echo "Setting up Homebrew + Brewfile bundle..."
-    ${SCRIPTPATH}/homebrew-setup.sh
-    if ! ( grep "$HOMEBREW_PREFIX/bin/bash" /etc/shells &>/dev/null ); then
-      echo "Adding bash to /etc/shells"
-      echo "$HOMEBREW_PREFIX/bin/bash" | sudo tee -a /etc/shells > /dev/null
-    fi
-    if ! ( grep "$HOMEBREW_PREFIX/bin/zsh" /etc/shells &>/dev/null ); then
-      echo "Adding zsh to /etc/shells"
-      echo "$HOMEBREW_PREFIX/bin/zsh" | sudo tee -a /etc/shells > /dev/null
-      sudo chmod -R 755 $HOMEBREW_PREFIX/share/zsh &>/dev/null
-    fi
-    sudo chsh -s $HOMEBREW_PREFIX/bin/zsh $(whoami)
+        # Install Homebrew, Formulae & Casks
+        echo "Setting up Homebrew + Brewfile bundle..."
+        "${SCRIPTPATH}/homebrew-setup.sh"
+        if ! ( grep "${HOMEBREW_PREFIX}/bin/bash" /etc/shells &>/dev/null ); then
+            echo "Adding bash to /etc/shells"
+            echo "${HOMEBREW_PREFIX}/bin/bash" | sudo tee -a /etc/shells > /dev/null
+        fi
+        if ! ( grep "${HOMEBREW_PREFIX}/bin/zsh" /etc/shells &>/dev/null ); then
+            echo "Adding zsh to /etc/shells"
+            echo "${HOMEBREW_PREFIX}/bin/zsh" | sudo tee -a /etc/shells > /dev/null
+            sudo chmod -R 755 "${HOMEBREW_PREFIX}/share/zsh" &>/dev/null
+        fi
+        sudo chsh -s "${HOMEBREW_PREFIX}/bin/zsh" "$(whoami)"
 
-    # Link dotfiles
-    echo "Setting up symlinks"
-    ${SCRIPTPATH}/symlink-setup.sh
+        # Link dotfiles
+        echo "Setting up symlinks"
+        "${SCRIPTPATH}/symlink-setup.sh"
 
-    echo "Setting up SSH config"
-    ${SCRIPTPATH}/ssh-setup.sh
+        echo "Setting up SSH config"
+        "${SCRIPTPATH}/ssh-setup.sh"
 
-    # Configure iTerm2
-    echo "Configuring iTerm2"
-    ${SCRIPTPATH}/.iterm/iterm-setup.sh
+        # Configure iTerm2
+        echo "Configuring iTerm2"
+        "${SCRIPTPATH}/.iterm/iterm-setup.sh"
 
-    # Configure Dock
-    echo "Configuring macOS Dock"
-    ${SCRIPTPATH}/macOS/dock.sh
-  ;;
-  "Linux" )
-    echo "Starting Installation (Linux)..."
-    # Link dotfiles
-    echo "Setting up symlinks"
-    ${SCRIPTPATH}/symlink-setup.sh
-  ;;
+        # Configure Dock
+        echo "Configuring macOS Dock"
+        "${SCRIPTPATH}/macOS/dock.sh"
+        ;;
+
+    "Linux" )
+        echo "Starting Installation (Linux)..."
+        # Link dotfiles
+        echo "Setting up symlinks"
+        "${SCRIPTPATH}/symlink-setup.sh"
+        ;;
 esac
 
 # Create user bin folder and copy scripts
 mkdir -p ~/bin
-cp ${SCRIPTPATH}/scripts/* ~/bin/
+cp "${SCRIPTPATH}/scripts/*" ~/bin/
