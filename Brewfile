@@ -1,27 +1,28 @@
 # Homebrew
-tap "homebrew/core"
-tap "homebrew/cask"
+
+## Taps
 tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"
 tap "homebrew/bundle"
 tap "romkatv/gitstatus"
+tap "txn2/tap"
 
-# Fonts
+## Fonts
 cask "font-fira-code"
 cask "font-hack-nerd-font"
 cask "font-mononoki-nerd-font"
 
-# Terminal
+## Terminal
 cask "iterm2"
 
-# Shell
+## Shell
 brew "bash"
 brew "bash-completion"
 brew "zsh"
 brew "zsh-completions"
-brew "gitstatus"
+brew "romkatv/gitstatus/gitstatus"
 
-# GNU Tools
+## GNU Tools
 brew "coreutils"
 brew "binutils"
 brew "diffutils"
@@ -40,7 +41,7 @@ brew "less"
 brew "make"
 brew "screen"
 
-# CLI Tools
+## CLI Tools
 brew "tmux"
 brew "fzf"
 brew "cfssl"
@@ -62,13 +63,15 @@ brew "yq"
 brew "tldr"
 brew "speedtest-cli"
 
-# Source Control & Editors
+## DevOps
+
+### Source Control & Editors
 brew "git"
 brew "git-filter-repo"
 brew "vim"
 cask "visual-studio-code"
 
-# Docker / Kubernetes
+### Docker / Kubernetes
 cask "docker"
 brew "kubernetes-cli"
 brew "minikube"
@@ -76,12 +79,21 @@ brew "kind"
 brew "krew"
 brew "helm"
 brew "kustomize"
+brew "txn2/tap/kubefwd"
 
-# Browsers
+### Terraform
+brew "terraform"
+
+### Cloud Providers
+brew "awscli"
+
+## Applications
+
+### Browsers
 cask "firefox"
 cask "google-chrome"
 
-# Apps
+### Apps
 cask "appcleaner"
 cask "keepingyouawake"
 cask "rectangle"
