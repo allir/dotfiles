@@ -5,15 +5,15 @@ alias left='ls -t -1'
 alias depth="find . -type d | awk -F\"/\" 'NF > max {max = NF-1} END {print max}'"
 alias myip='dig @resolver1.opendns.com myip.opendns.com +short'
 alias cpv='rsync -ah --info=progress2'
-alias mnt="mount | awk -F' ' '{ printf \"%s\t%s\n\",\$1,\$3; }' | column -t | egrep ^/dev/ | sort"
 alias starwars='nc towel.blinkenlights.nl 23'
 
 # Aliases replacing common commands when possible
 if command -v bat &>/dev/null; then
-  alias cat='bat --style=plain --paging=never'
+    export BAT_THEME="Monokai Extended"
+    alias cat='bat --style=plain --paging=never'
 fi
 if command -v prettyping &>/dev/null; then
-  alias ping='prettyping --nolegend'
+    alias ping='prettyping --nolegend'
 fi
 
 # Homebrew
@@ -30,32 +30,19 @@ alias gitno='git --no-pager'
 
 # Docker/Kubernetes
 kube(){
-  export KUBECONFIG=~/.kube/configs/${1}
+    export KUBECONFIG=~/.kube/configs/${1}
 }
 kubedecode(){
-  kubectl get secret -o json $* | jq -r '.data | map_values(@base64d)'
+    kubectl get secret -o json "$@" | jq -r '.data | map_values(@base64d)'
 }
 daemoncat(){
-  kubectl exec -ti -n daemoncat $* -- nsenter -t 1 -m -i -n -u bash
+    kubectl exec -ti -n daemoncat "$@" -- nsenter -t 1 -m -i -n -u bash
 }
 alias d='docker'
 alias k='kubectl'
 alias fine='docker run -it --rm ghcr.io/pdevine/thisisfine'
 
-# History
-## Prunes all duplicates from history
-history-prune(){
-  tac "$HISTFILE" | awk '!x[$0]++' > /tmp/history && tac /tmp/history > "$HISTFILE" && rm /tmp/history
-}
-## History stats
-history-top(){
-  history | awk '{print $2;}' | sort | uniq -c | sort -rn | head -10
-}
-history-tops(){
-  history | sed -e 's/ *[0-9][0-9]* *//' | sort | uniq -c | sort -rn | head -10
-}
-
 # Flush DNS cache on macOS
 if [[ `uname -s` == "Darwin" ]]; then
-  alias flushdns='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
+    alias flushdns='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
 fi

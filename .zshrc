@@ -1,5 +1,6 @@
-# Aliases
+# Aliases / Functions
 source ~/.shell/alias
+source ~/.shell/functions
 
 # Set EMACS mode
 set -o emacs
@@ -18,15 +19,15 @@ if command -v fzf &>/dev/null; then
 fi
 
 # Prompt
-if [ -r "$HOMEBREW_PREFIX/opt/gitstatus/gitstatus.prompt.zsh" ];then
-  source "$HOMEBREW_PREFIX/opt/gitstatus/gitstatus.prompt.zsh"
+if [ -r "${HOMEBREW_PREFIX}/opt/gitstatus/gitstatus.prompt.zsh" ];then
+  source "${HOMEBREW_PREFIX}/opt/gitstatus/gitstatus.prompt.zsh"
   PROMPT='%(?..%F{red}✘ %?%f'$'\n'')%(!.%F{red}%n%f.%F{cyan}%n%f)@%F{blue}%B%m%b%f:%2~${GITSTATUS_PROMPT:+ %129F⌥(%f$GITSTATUS_PROMPT%129F)%f} %# '
 else
   PROMPT='%(?..%F{red}✘ %?%f'$'\n'')%(!.%F{red}%n%f.%F{cyan}%n%f)@%F{blue}%B%m%b%f:%2~ %# '
 fi
 
 # Includes from .zshrc.d 
-if [ -d ${HOME}/.zshrc.d ]; then
+if [ -d "${HOME}/.zshrc.d" ]; then
   for file in ~/.zshrc.d/*.zshrc; do
     source "${file}"
   done
