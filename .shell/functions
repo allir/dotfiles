@@ -15,10 +15,27 @@ history-tops(){
 
 # AWS Profile Selection
 awspro() {
+    local profile
+    if [[ $# -gt 1 ]]; then
+        echo "Usage:"
+        echo "    awspro"
+        echo "    awspro [profile]"
+        return
+    fi
+    if [[ $# -eq 1 ]]; then
+        profile=$(sed -n "s/\[profile \(.*\)\]/\1/gp" ~/.aws/config | grep -i "$1")
+        if [[ -n $profile ]]; then
+            export AWS_PROFILE=$profile
+            return
+        else
+            echo "Profile $1 not found"
+            return
+        fi
+    fi
+
     if command -v fzf &>/dev/null; then
         profile=$(sed -n "s/\[profile \(.*\)\]/\1/gp" ~/.aws/config | fzf)
         export AWS_PROFILE=$profile
-
     else
       select p in $(sed -n "s@\[profile \(.*\)\]@\1@gp" ~/.aws/config); do
             export AWS_PROFILE=$p
