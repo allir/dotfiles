@@ -22,10 +22,41 @@ fi
 autoload -Uz vcs_info
 autoload -U colors && colors
 zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:*' stagedstr '%F{green}●%f'
-zstyle ':vcs_info:*' unstagedstr '%F{red}●%f'
-zstyle ':vcs_info:git:*' formats "%129F⌥(%f%{$fg[green]%}%b%{$reset_color%}%129F)%f%m%u%c"
-zstyle ':vcs_info:git:*' actionformats "%129F⌥(%f%{$fg[green]%}%b%{$reset_color%}%129F|%f%{$fg[red]%}%a%{$reset_color%}%129F)%f%m%u%c"
+zstyle ':vcs_info:*' stagedstr '%F{green}+%f'
+zstyle ':vcs_info:*' unstagedstr '%F{red}!%f'
+zstyle ':vcs_info:git:*' formats "%129F⌥(%f %F{green}%b%f %m%u%c%129F)%f"
+zstyle ':vcs_info:git:*' actionformats "%129F⌥(%f %F{green}%b%f %129F|%f %F{red}%a%f %129F)%f"
+zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
+
++vi-git-untracked() {
+  if ! [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]]; then
+    return
+  fi
+
+  # Find status on ahead and behind
+  if git status -sb | grep -m 1 '^##' &>/dev/null; then
+    local gitstatus ahead behind
+    gitstatus=$(git status -sb | grep -m 1 '^##')
+    ahead=$(echo $gitstatus | grep -o 'ahead [0-9]*' | grep -o '[0-9]*')
+    behind=$(echo $gitstatus | grep -m 1 '^##' | grep -o 'behind [0-9]*' | grep -o '[0-9]*')
+
+    if [[ -n $ahead ]]; then
+      hook_com[misc]+='%F{green}↑%f'
+    fi
+
+    if [[ -n $behind ]]; then
+      hook_com[misc]+='%F{red}↓%f'
+    fi
+
+    if [[ -n $ahead || -n $behind ]]; then
+      hook_com[misc]+=' '
+    fi
+  fi
+
+  if git status --porcelain | grep -m 1 '^??' &>/dev/null; then
+    hook_com[misc]+='%F{red}?%f'
+  fi
+}
 
 # Prompt
 setopt prompt_subst
