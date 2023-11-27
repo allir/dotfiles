@@ -15,32 +15,89 @@ history-tops(){
 
 # AWS Profile Selection
 awspro() {
-    local profile
-    if [[ $# -gt 1 ]]; then
-        echo "Usage:"
-        echo "    awspro"
-        echo "    awspro [profile]"
-        return
-    fi
-    if [[ $# -eq 1 ]]; then
-        profile=$(sed -n "s/\[profile \(.*\)\]/\1/gp" ~/.aws/config | grep -i "$1")
+    function show_help() {
+        local prog="awspro"
+        printf "AWSPro Usage:\n" >&2
+        printf "\t%s\t\t\t\t\t%s\n"  "$prog" "Promt for profile selection" >&2
+        printf "\t%s\t\t%s\n"  "$prog --profile=[profile]" "Select given profile" >&2
+        printf "\t%s\t\t\t\t%s\n"  "$prog --login" "Perform AWS SSO Login for selected profile" >&2
+    }
+
+    local profile=""
+    local error_profile="ERROR: '--profile' requires a non-empty option argument."
+    local login="false"
+    local verbose=0
+
+    # Handle arguments
+    while true; do
+    case $1 in
+        -p|--profile)       # Takes an option argument; ensure it has been specified.
+            if [ "$2" ]; then
+                profile=$2
+                shift
+            else
+                printf "%s\n" "$error_profile"
+            fi
+            ;;
+        --profile=?*)
+            profile=${1#*=} # Delete everything up to "=" and assign the remainder.
+            ;;
+        --profile=)         # Handle the case of an empty --file=
+            printf "%s\n" "$error_profile"
+            ;;
+        -l|--login)
+            login="true"
+            ;;
+        -h|-\?|--help)
+            show_help    # Display a usage synopsis.
+            return
+            ;;
+        -v|--verbose)
+            verbose=$((verbose + 1))  # Each -v adds 1 to verbosity.
+            ;;
+        --)              # End of all options.
+            shift
+            break
+            ;;
+        -?*)
+            printf 'WARN: Unknown option (ignored): %s\n' "$1" >&2
+            ;;
+        *)               # Default case: No more options, so break out of the loop.
+            break
+    esac
+        shift
+    done
+
+    if [[ -n "$profile" ]]; then
+        profile=$(sed -n "s/\[profile \(.*\)\]/\1/gp" ~/.aws/config | grep -i "$profile")
         if [[ -n $profile ]]; then
             export AWS_PROFILE=$profile
-            return
         else
-            echo "Profile $1 not found"
+            printf "%s\n" "Profile $1 not found"
             return
         fi
+    else
+        if command -v fzf &>/dev/null; then
+            profile=$(sed -n "s/\[profile \(.*\)\]/\1/gp" ~/.aws/config | fzf)
+        else
+            select p in $(sed -n "s@\[profile \(.*\)\]@\1@gp" ~/.aws/config); do
+                profile="$p"
+            done
+        fi
+
+        export AWS_PROFILE=$profile
     fi
 
-    if command -v fzf &>/dev/null; then
-        profile=$(sed -n "s/\[profile \(.*\)\]/\1/gp" ~/.aws/config | fzf)
-        export AWS_PROFILE=$profile
-    else
-      select p in $(sed -n "s@\[profile \(.*\)\]@\1@gp" ~/.aws/config); do
-            export AWS_PROFILE=$p
-            break
-      done
+    if [[ "$login" == "true" ]]; then
+        if command -v aws &>/dev/null; then
+            if aws sts get-caller-identity &>/dev/null; then
+                printf "%s\n" "Already logged in"
+            else
+                aws sso login
+            fi
+        else
+            printf "%s\n" "AWS CLI not installed"
+        fi
     fi
 }
 
