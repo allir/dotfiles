@@ -5,6 +5,10 @@ source ~/.shell/functions
 # Set EMACS mode
 set -o emacs
 
+# Bash style comments and wildcard (*) handling
+setopt interactivecomments
+unsetopt nomatch
+
 # zsh Completions
 if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
