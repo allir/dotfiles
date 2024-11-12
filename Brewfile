@@ -64,7 +64,7 @@ brew "speedtest-cli"
 
 ## DevOps
 
-### Source Control & Editors
+### Source Control & Code Editors
 brew "git"
 brew "git-filter-repo"
 brew "vim"
@@ -77,7 +77,7 @@ brew "minikube"
 brew "kind"
 brew "krew"
 brew "helm"
-brew "kustomize"
+#brew "kustomize"
 brew "txn2/tap/kubefwd"
 
 ### Terraform
