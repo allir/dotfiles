@@ -2476,6 +2476,8 @@
 	<true/>
 	<key>JobName</key>
 	<true/>
+	<key>NeverBlockSystemShutdown</key>
+	<true/>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -4220,7 +4222,7 @@
 	<key>StretchTabsToFillBar</key>
 	<true/>
 	<key>TabStyleWithAutomaticOption</key>
-	<integer>5</integer>
+	<integer>4</integer>
 	<key>TabsHaveCloseButton</key>
 	<true/>
 	<key>ThreeFingerEmulates</key>
