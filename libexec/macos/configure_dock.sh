@@ -33,10 +33,9 @@ defaults write com.apple.dock show-process-indicators -bool yes
 defaults write com.apple.dock show-recents -bool yes
 
 ## Menu bar 
-### Automatically hide and show the menubar on desktop
+### Automatically show or hide the menubar on desktop
+### Automatically show or hide the menubar in fullscreen
 defaults write "Apple Global Domain" "_HIHideMenuBar" -bool no
-
-### Automatically hide and show the menubar in fullscreen
 defaults write "Apple Global Domain" AppleMenuBarVisibleInFullscreen -bool no
 
 ## Hidden Features
@@ -73,7 +72,7 @@ dock_spacer() {
 }
 
 defaults write com.apple.dock persistent-apps -array \
-    "$(dock_item /Applications/Safari.app)" \
+    "$(dock_item /System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app)" \
     "$(dock_item /System/Applications/Calendar.app)" \
     "$(dock_item /System/Applications/Contacts.app)" \
     "$(dock_item /System/Applications/Notes.app)" \
