@@ -1,17 +1,4 @@
-# Functions
-
-# History
-## Prunes all duplicates from history
-history-prune(){
-    tac "$HISTFILE" | awk '!x[$0]++' > /tmp/history && tac /tmp/history > "$HISTFILE" && rm /tmp/history
-}
-## History stats
-history-top(){
-    history | awk '{print $2;}' | sort | uniq -c | sort -rn | head -10
-}
-history-tops(){
-    history | sed -e 's/ *[0-9][0-9]* *//' | sort | uniq -c | sort -rn | head -10
-}
+#!/usr/bin/env bash
 
 # AWS Profile Selection
 awspro() {
@@ -69,7 +56,7 @@ awspro() {
     done
 
     if [[ -n "$profile" ]]; then
-        profile=$(sed -n "s/\[profile \(.*\)\]/\1/gp" ~/.aws/config | grep -i "$profile")
+        profile=$(sed -n "s/\[profile \(.*\)\]/\1/gp" "${HOME}/.aws/config" | grep -i "$profile")
         if [[ -n $profile ]]; then
             export AWS_PROFILE=$profile
         else
@@ -78,9 +65,9 @@ awspro() {
         fi
     else
         if command -v fzf &>/dev/null; then
-            profile=$(sed -n "s/\[profile \(.*\)\]/\1/gp" ~/.aws/config | fzf)
+            profile=$(sed -n "s/\[profile \(.*\)\]/\1/gp" "${HOME}/.aws/config" | fzf)
         else
-            select p in $(sed -n "s@\[profile \(.*\)\]@\1@gp" ~/.aws/config); do
+            select p in $(sed -n "s@\[profile \(.*\)\]@\1@gp" "${HOME}/.aws/config"); do
                 profile="$p"
             done
         fi
@@ -100,10 +87,3 @@ awspro() {
         fi
     fi
 }
-
-# Mount output for macOS
-if [[ $(uname -s) == "Darwin" ]]; then
-    mnt() {
-        mount | awk -F' ' '{ printf "%s\t%s\n",$1,$3; }' | column -t | grep -E ^/dev/ | sort
-    }
-fi

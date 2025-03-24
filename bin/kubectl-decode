@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+if [[ $# -gt 1 ]]; then
+    echo "Usage:"
+    echo "  decode [secret]"
+    exit 0
+fi
+if [[ -z "$1" ]]; then
+    echo "Usage:"
+    echo "  decode [secret]"
+    exit 0
+else
+    SECRET="$1"
+fi
+
+kubectl get secret -o json "${SECRET}" | jq -r '.data | map_values(@base64d)'

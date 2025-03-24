@@ -1,4 +1,4 @@
-# Homebrew
+# Homebrew Bundle
 
 ## Taps
 tap "homebrew/cask-fonts"
@@ -43,7 +43,6 @@ brew "screen"
 ## CLI Tools
 brew "tmux"
 brew "fzf"
-brew "cfssl"
 brew "archey4"
 brew "cowsay"
 brew "fortune"
@@ -73,15 +72,18 @@ cask "visual-studio-code"
 ### Docker / Kubernetes
 cask "docker"
 brew "kubernetes-cli"
-brew "minikube"
-brew "kind"
+#brew "minikube"
+#brew "kind"
 brew "krew"
 brew "helm"
-#brew "kustomize"
 brew "txn2/tap/kubefwd"
 
-### Terraform
-brew "terraform"
+# CFSSL
+#brew "cfssl"
+
+### Terraform / OpenTofu
+#brew "terraform"
+brew "opentofu"
 
 ### Cloud Providers
 brew "awscli"
@@ -89,20 +91,20 @@ brew "awscli"
 ## Applications
 
 ### Browsers
-cask "firefox"
+#cask "firefox"
 cask "google-chrome"
 
 ### Apps
 cask "appcleaner"
 cask "keepingyouawake"
-cask "rectangle"
+#cask "rectangle"
 cask "1password-beta"
 cask "1password-cli"
 cask "spotify"
 cask "slack"
-cask "discord"
-cask "google-drive"
-cask "nordvpn"
+#cask "discord"
+#cask "google-drive"
+#cask "nordvpn"
 cask "transmission"
 cask "vlc"
 cask "zoom"

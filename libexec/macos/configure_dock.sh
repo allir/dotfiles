@@ -3,7 +3,6 @@
 # System Preferences - Dock & Menubar
 
 ## Dock 
-
 ### Dock size and magnification. Values 16 - 128
 defaults write com.apple.dock tilesize -int 48
 defaults write com.apple.dock largesize -int 64
@@ -34,9 +33,8 @@ defaults write com.apple.dock show-process-indicators -bool yes
 defaults write com.apple.dock show-recents -bool yes
 
 ## Menu bar 
-
 ### Automatically hide and show the menubar on desktop
-defaults write "Apple Global Domain" "_HIHideMenuBar" -bool yes
+defaults write "Apple Global Domain" "_HIHideMenuBar" -bool no
 
 ### Automatically hide and show the menubar in fullscreen
 defaults write "Apple Global Domain" AppleMenuBarVisibleInFullscreen -bool no
@@ -87,9 +85,7 @@ defaults write com.apple.dock persistent-apps -array \
     "$(dock_item /Applications/Visual\ Studio\ Code.app)" \
     "$(dock_item /Applications/Slack.app)" \
     "$(dock_item /Applications/iTerm.app)" \
-    "$(dock_item /System/Applications/App\ Store.app)" \
-    "$(dock_item /System/Applications/System\ Preferences.app)" \
-
+    "$(dock_item /System/Applications/System\ Settings.app)" \
 
 ## Restart Dock
 killall Dock

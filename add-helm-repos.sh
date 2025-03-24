@@ -1,4 +1,11 @@
 #!/usr/bin/env bash
+set -euo pipefail
+
+if ! command -v helm &> /dev/null; then
+    echo "helm not found, skipping helm repos setup"
+    exit 0
+fi
+
 # Helm Repos
 helm repo add bitnami               https://charts.bitnami.com/bitnami
 helm repo add hashicorp             https://helm.releases.hashicorp.com

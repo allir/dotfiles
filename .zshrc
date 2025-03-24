@@ -1,13 +1,11 @@
+# shellcheck disable=SC1090,SC1091
 # Aliases / Functions
-source ~/.shell/alias
-source ~/.shell/functions
+source "${HOME}/.shell/commonrc"
 
-# Set EMACS mode
-set -o emacs
-
-# Bash style comments and wildcard (*) handling
+# Bash style comments and wildcard (*) handling, EMACS keybindings
 setopt interactivecomments
 unsetopt nomatch
+set -o emacs
 
 # zsh Completions
 if type brew &>/dev/null; then
@@ -19,7 +17,7 @@ fi
 
 # Fuzzy Find
 if command -v fzf &>/dev/null; then
-  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+  [ -f "${HOME}/.shell/.fzf.zsh" ] && source "${HOME}/.shell/.fzf.zsh"
 fi
 
 # Version Control Info
@@ -41,10 +39,11 @@ zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
   if git status -sb | grep -m 1 '^##' &>/dev/null; then
     local gitstatus ahead behind
     gitstatus=$(git status -sb | grep -m 1 '^##')
-    ahead=$(echo $gitstatus | grep -o 'ahead [0-9]*' | grep -o '[0-9]*')
-    behind=$(echo $gitstatus | grep -m 1 '^##' | grep -o 'behind [0-9]*' | grep -o '[0-9]*')
+    ahead=$(echo "$gitstatus" | grep -o 'ahead [0-9]*' | grep -o '[0-9]*')
+    behind=$(echo "$gitstatus" | grep -m 1 '^##' | grep -o 'behind [0-9]*' | grep -o '[0-9]*')
 
     if [[ -n $ahead ]]; then
+      # shellcheck disable=SC2154
       hook_com[misc]+='%F{green}↑%f'
     fi
 
@@ -67,17 +66,18 @@ setopt prompt_subst
 precmd() {
   vcs_info
 }
+# shellcheck disable=SC2034,SC2016
 PROMPT='%(?..%F{red}✘ %?%f'$'\n'')%(!.%F{red}%n%f.%F{cyan}%n%f)@%F{blue}%B%m%b%f:%2~${vcs_info_msg_0_:+ $vcs_info_msg_0_} %# '
 
 
 # Includes from .zshrc.d 
 if [ -d "${HOME}/.zshrc.d" ]; then
-  for file in ~/.zshrc.d/*.zshrc; do
+  for file in "${HOME}"/.zshrc.d/*.zshrc; do
     source "${file}"
   done
 fi
 
 # Local additions
-if [ -r ~/.zshrc.local ]; then
-  source ~/.zshrc.local
+if [ -r "${HOME}/.zshrc.local" ]; then
+  source "${HOME}/.zshrc.local"
 fi

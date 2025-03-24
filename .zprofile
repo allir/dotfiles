@@ -1,16 +1,16 @@
 # Environment
-source ~/.shell/env
+source "${HOME}/.shell/profile"
 
 # PATH
-source ~/.shell/path
+source "${HOME}/.shell/path"
 
 # History Management
-export HISTFILE=~/.history
+export HISTFILE="${HOME}/.history"
 setopt share_history
 unsetopt inc_append_history
 setopt extended_history
 setopt hist_find_no_dups
 setopt hist_ignore_all_dups
    
-export HISTSIZE=25000
-export HISTFILESIZE=25000
+export HISTSIZE=100000
+export HISTFILESIZE=1000000

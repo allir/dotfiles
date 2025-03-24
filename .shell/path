@@ -2,6 +2,7 @@
 # To make sure the path is correctly ordered if the path_helper exists we clear the path and
 # run it again for correct order.
 if [ -x /usr/libexec/path_helper ]; then
+    # shellcheck disable=SC2123
     PATH=""
     eval "`/usr/libexec/path_helper -s`"
 fi
@@ -43,7 +44,7 @@ if command -v go &>/dev/null && [[ ! "$PATH" == *$(go env GOPATH)/bin* ]]; then
 fi
 
 # Add Rust to path
-if [ -d ~/.cargo ]; then
+if [ -d "${HOME}/.cargo" ]; then
     source "$HOME/.cargo/env"
 fi
 

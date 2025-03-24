@@ -12,7 +12,7 @@ sudo -v
 # Keep-alive: update existing `sudo` time stamp until finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-case `uname -s` in
+case $(uname -s) in
     "Darwin" )
         echo "Starting Installation (Darwin)..."
         # Install xcode command line tools
@@ -27,9 +27,14 @@ case `uname -s` in
           sleep 1
         done
 
-        # Install Homebrew, Formulae & Casks
-        echo "Setting up Homebrew + Brewfile bundle..."
-        "${SCRIPTPATH}/homebrew-setup.sh"
+        # Install Homebrew
+        echo "Setting up Homebrew"
+        "${SCRIPTPATH}/libexec/setup_homebrew.sh"
+        # Install  Formulae & Casks
+        echo "Installing Formulae and Casks from Brewfile bundle"
+        brew bundle --file="${SCRIPTPATH}/Brewfile" || true
+
+        # Add homebrew bash and zsh to /etc/shells and change shell
         if ! ( grep "${HOMEBREW_PREFIX}/bin/bash" /etc/shells &>/dev/null ); then
             echo "Adding bash to /etc/shells"
             echo "${HOMEBREW_PREFIX}/bin/bash" | sudo tee -a /etc/shells > /dev/null
@@ -43,28 +48,30 @@ case `uname -s` in
 
         # Link dotfiles
         echo "Setting up symlinks"
-        "${SCRIPTPATH}/symlink-setup.sh"
+        "${SCRIPTPATH}/libexec/setup_symlinks.sh"
 
         echo "Setting up SSH config"
-        "${SCRIPTPATH}/ssh-setup.sh"
+        "${SCRIPTPATH}/libexec/setup_ssh.sh"
 
         # Configure iTerm2
         echo "Configuring iTerm2"
-        "${SCRIPTPATH}/.iterm/iterm-setup.sh"
+        "${SCRIPTPATH}/libexec/setup_iterm.sh"
 
         # Configure Dock
         echo "Configuring macOS Dock"
-        "${SCRIPTPATH}/macOS/dock.sh"
+        "${SCRIPTPATH}/libexec/macos/configure_dock.sh"
         ;;
 
     "Linux" )
         echo "Starting Installation (Linux)..."
         # Link dotfiles
         echo "Setting up symlinks"
-        "${SCRIPTPATH}/symlink-setup.sh"
+        "${SCRIPTPATH}/libexec/setup_symlinks.sh"
         ;;
 esac
 
-# Create user bin folder and copy scripts
-mkdir -p ~/bin
-cp "${SCRIPTPATH}/scripts/*" ~/bin/
+# Create user bin folder and link scripts
+mkdir -p "${HOME}/bin"
+for f in "${SCRIPTPATH}/bin/"*; do
+    ln -sf "$f" "${HOME}/bin/"
+done

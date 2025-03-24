@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+NODE=""
+if [[ $# -gt 1 ]]; then
+    echo "Usage:"
+    echo "  breakout"
+    echo "  breakout [NODE]"
+    exit 0
+fi
+if [[ -z "$1" ]]; then
+    NODE="$(kubectl get nodes -o jsonpath='{.items[0].metadata.name}')"
+else
+    NODE="$1"
+fi
+kubectl run --rm -ti "${NODE//./-}" --image nicolaka/netshoot --privileged=true --overrides="{\"kind\": \"Pod\", \"apiVersion\": \"v1\", \"spec\": {\"nodeName\": \"${NODE}\", \"hostNetwork\": true, \"hostPID\": true}}" -- nsenter -t1 -m -i -n -u -p bash

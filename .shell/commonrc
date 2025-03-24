@@ -1,11 +1,23 @@
 # Aliases
 alias ll='ls -alF'
-alias lt='du -sh * | sort -h'
+alias lt='du -sh * | sort -h -r'
 alias left='ls -t -1'
 alias depth="find . -type d | awk -F\"/\" 'NF > max {max = NF-1} END {print max}'"
 alias myip='dig @resolver1.opendns.com myip.opendns.com +short'
 alias cpv='rsync -ah --info=progress2'
 alias starwars='nc towel.blinkenlights.nl 23'
+
+# Mount output for macOS
+if [[ $(uname -s) == "Darwin" ]]; then
+    mnt() {
+        mount | awk -F' ' '{ printf "%s\t%s\n",$1,$3; }' | column -t | grep -E ^/dev/ | sort
+    }
+fi
+
+# Flush DNS cache on macOS
+if [[ `uname -s` == "Darwin" ]]; then
+    alias flushdns='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
+fi
 
 # Aliases replacing common commands when possible
 if command -v bat &>/dev/null; then
@@ -16,33 +28,34 @@ if command -v prettyping &>/dev/null; then
     alias ping='prettyping --nolegend'
 fi
 
+# History
+## Prunes all duplicates from history
+history-prune(){
+    tac "$HISTFILE" | awk '!x[$0]++' > /tmp/history && tac /tmp/history > "$HISTFILE" && rm /tmp/history
+}
+## History stats
+history-top(){
+    history | awk '{print $2;}' | sort | uniq -c | sort -rn | head -10
+}
+history-tops(){
+    history | sed -e 's/ *[0-9][0-9]* *//' | sort | uniq -c | sort -rn | head -10
+}
+
 # Homebrew
 alias brewdeps="brew leaves | xargs brew deps --installed --for-each"
 alias brewtree="brew leaves | xargs brew deps --installed --tree"
-
-# Python
-alias ve='python3 -m venv ./venv'
-alias va='source ./venv/bin/activate'
 
 # Git
 alias gitroot='cd `git rev-parse --show-toplevel`'
 alias gitno='git --no-pager'
 
+# Python
+alias pve='python3 -m venv ./venv'
+alias pva='source ./venv/bin/activate'  
+
 # Docker/Kubernetes
-kube(){
-    export KUBECONFIG=~/.kube/configs/${1}
-}
-kubedecode(){
-    kubectl get secret -o json "$@" | jq -r '.data | map_values(@base64d)'
-}
-daemoncat(){
-    kubectl exec -ti -n daemoncat "$@" -- nsenter -t 1 -m -i -n -u bash
-}
 alias d='docker'
 alias k='kubectl'
 alias fine='docker run -it --rm ghcr.io/pdevine/thisisfine'
 
-# Flush DNS cache on macOS
-if [[ `uname -s` == "Darwin" ]]; then
-    alias flushdns='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
-fi
+source "${HOME}/.shell/awspro"

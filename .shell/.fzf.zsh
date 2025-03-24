@@ -1,6 +1,6 @@
 # Setup fzf
 # ---------
-case `uname -s` in
+case $(uname -s) in
     "Darwin" )
         if [[ ! "$PATH" == *$HOMEBREW_PREFIX/opt/fzf/bin* ]]; then
           export PATH="$HOMEBREW_PREFIX/opt/fzf/bin:$PATH"

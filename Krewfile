@@ -1,10 +1,11 @@
+# Krewfile
 ctx
 ns
 neat
 
 stern
 
-oidc-login
+#oidc-login
 
 who-can
 
