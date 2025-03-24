@@ -11,7 +11,7 @@ cask "font-fira-code"
 cask "font-hack-nerd-font"
 cask "font-mononoki-nerd-font"
 
-## Terminal
+## Terminal Emulators
 cask "iterm2"
 
 ## Shell
@@ -68,6 +68,10 @@ brew "git"
 brew "git-filter-repo"
 brew "vim"
 cask "visual-studio-code"
+#cask "goland"
+
+### Network Monitoring
+#cask wireshark
 
 ### Docker / Kubernetes
 cask "docker"
@@ -88,6 +92,7 @@ brew "opentofu"
 ### Cloud Providers
 brew "awscli"
 
+
 ## Applications
 
 ### Browsers
@@ -97,15 +102,17 @@ cask "google-chrome"
 ### Apps
 cask "appcleaner"
 cask "keepingyouawake"
+cask "keyboardcleantool"
 #cask "rectangle"
 cask "1password-beta"
 cask "1password-cli"
 cask "chatgpt"
 cask "spotify"
 cask "slack"
+cask "telegram"
+cask "zoom"
 #cask "discord"
 #cask "google-drive"
 #cask "nordvpn"
 cask "transmission"
 cask "vlc"
-cask "zoom"
