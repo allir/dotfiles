@@ -17,4 +17,4 @@
 	show-root = rev-parse --show-toplevel
 
 [include]
-path = ${HOME}/.gitconfig.local
+  path = ~/.gitconfig.local
