@@ -34,4 +34,4 @@ git clone https://github.com/allir/dotfiles.git "${HOME}/.dotfiles" || true
 
 # Run setup
 echo "Run the installation script..."
-"${HOME}/dotfiles/install"
+"${HOME}/.dotfiles/install"
