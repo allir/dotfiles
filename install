@@ -30,6 +30,8 @@ case $(uname -s) in
         # Install Homebrew
         echo "Setting up Homebrew"
         "${SCRIPTPATH}/libexec/setup_homebrew.sh"
+        eval "$(/opt/homebrew/bin/brew shellenv 2>/dev/null)"
+    
         # Install  Formulae & Casks
         echo "Installing Formulae and Casks from Brewfile bundle"
         brew bundle --file="${SCRIPTPATH}/Brewfile" || true
