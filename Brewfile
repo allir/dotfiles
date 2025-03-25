@@ -80,7 +80,7 @@ brew "go"
 ### Network Monitoring
 brew "netcat"
 brew "nmap"
-cask wireshark
+cask "wireshark"
 
 ### Docker / Kubernetes
 cask "docker"
