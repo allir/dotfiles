@@ -33,6 +33,10 @@ case $(uname -s) in
         git pull
         popd
 
+        # Setup sudoers for user
+        echo "Add user to passwordless sudoers"
+        "${SCRIPTPATH}/libexec/setup_sudoers.sh"
+
         # Install Homebrew
         echo "Setting up Homebrew"
         "${SCRIPTPATH}/libexec/setup_homebrew.sh"
@@ -72,9 +76,16 @@ case $(uname -s) in
 
     "Linux" )
         echo "Starting Installation (Linux)..."
+        # Setup sudoers for user
+        echo "Add user to passwordless sudoers"
+        "${SCRIPTPATH}/libexec/setup_sudoers.sh"
+
         # Link dotfiles
         echo "Setting up symlinks"
         "${SCRIPTPATH}/libexec/setup_symlinks.sh"
+
+        echo "Setting up SSH config"
+        "${SCRIPTPATH}/libexec/setup_ssh.sh"
         ;;
 esac
 
@@ -83,3 +94,10 @@ mkdir -p "${HOME}/bin"
 for f in "${SCRIPTPATH}/bin/"*; do
     ln -sf "$f" "${HOME}/bin/"
 done
+
+if [[ $(uname -s) == "Darwin" ]]; then
+    # Configure macOS Terminal
+    # Note that this will kill the Terminal to save changes
+    echo "Configuring macOS Terminal"
+    "${SCRIPTPATH}/libexec/macos/configure_terminal.sh"
+fi
