@@ -31,6 +31,9 @@ esac
 echo "Clone the dotfiles repository..."
 cd
 git clone https://github.com/allir/dotfiles.git "${HOME}/.dotfiles" || true
+pushd "${HOME}/.dotfiles"
+git pull
+popd
 
 # Run setup
 echo "Run the installation script..."
