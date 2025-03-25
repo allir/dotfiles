@@ -20,6 +20,7 @@ brew "bash-completion"
 brew "bash-git-prompt"
 brew "zsh"
 brew "zsh-completions"
+brew "shellcheck"
 
 ## GNU Tools
 brew "coreutils"
@@ -47,6 +48,7 @@ brew "archey4"
 brew "cowsay"
 brew "fortune"
 brew "lolcat"
+brew "nyancat"
 brew "bat"
 brew "glances"
 brew "htop"
@@ -56,10 +58,11 @@ brew "tree"
 brew "watch"
 brew "wdiff"
 brew "wget"
+brew "pstree"
 brew "jq"
 brew "yq"
 brew "tldr"
-brew "speedtest-cli"
+#brew "speedtest-cli"
 
 ## DevOps
 
@@ -70,17 +73,24 @@ brew "vim"
 cask "visual-studio-code"
 #cask "goland"
 
+# Programming Languages
+brew "python3"
+brew "go"
+
 ### Network Monitoring
-#cask wireshark
+brew "netcat"
+brew "nmap"
+cask wireshark
 
 ### Docker / Kubernetes
 cask "docker"
 brew "kubernetes-cli"
+brew "txn2/tap/kubefwd"
+brew "krew"
+brew "k9s"
 #brew "minikube"
 #brew "kind"
-brew "krew"
 brew "helm"
-brew "txn2/tap/kubefwd"
 
 # CFSSL
 #brew "cfssl"
@@ -88,6 +98,7 @@ brew "txn2/tap/kubefwd"
 ### Terraform / OpenTofu
 #brew "terraform"
 brew "opentofu"
+brew "tflint"
 
 ### Cloud Providers
 brew "awscli"
