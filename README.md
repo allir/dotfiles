@@ -17,7 +17,7 @@ Before installing you may want to make sure your computer is up to date.
 Run the `install` script.
 
 ```bash
-curl -s https://raw.githubusercontent.com/allir/dotfiles/master/remote_install | bash
+curl -s https://raw.githubusercontent.com/allir/dotfiles/main/remote_install | bash
 ```
 
 OR

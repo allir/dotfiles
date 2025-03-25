@@ -30,7 +30,7 @@ esac
 # Clone the repository
 echo "Clone the dotfiles repository..."
 cd
-git clone https://github.com/allir/dotfiles.git "${HOME}/.dotfiles" || true
+git clone https://github.com/allir/dotfiles.git "${HOME}/.dotfiles" 2>/dev/null || true
 pushd "${HOME}/.dotfiles"
 git pull
 popd
