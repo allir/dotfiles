@@ -27,6 +27,12 @@ case $(uname -s) in
           sleep 1
         done
 
+        # Ensure latest version of .dotfiles repo
+        echo "Updating dotfiles repository..."
+        pushd "${SCRIPTPATH}"
+        git pull
+        popd
+
         # Install Homebrew
         echo "Setting up Homebrew"
         "${SCRIPTPATH}/libexec/setup_homebrew.sh"
