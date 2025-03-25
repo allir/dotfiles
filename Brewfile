@@ -1,9 +1,6 @@
 # Homebrew Bundle
 
 ## Taps
-tap "homebrew/cask-fonts"
-tap "homebrew/cask-versions"
-tap "homebrew/bundle"
 tap "txn2/tap"
 
 ## Fonts
