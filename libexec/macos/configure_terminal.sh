@@ -6,7 +6,7 @@ set -euo pipefail
 # SCRIPT=$( readlink -f ${BASH_SOURCE[0]} )
 SCRIPT=$( cd "$( dirname "${BASH_SOURCE[0]}" )" &>/dev/null && pwd )/$( basename "${BASH_SOURCE[0]}" )
 SCRIPTPATH=$( dirname "${SCRIPT}" )
-PROFILEPATH=$( realpath "${SCRIPTPATH}/../../var/lib/terminal/allir.terminal" )
+PROFILEPATH=$( realpath "${SCRIPTPATH}/../../share/terminal/allir.terminal" )
 
 #osascript "${SCRIPTPATH}/configure_terminal.scpt" "${PROFILEPATH}"
 echo "Importing Terminal profile, this will open a new Terminal window"
