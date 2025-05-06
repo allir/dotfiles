@@ -28,8 +28,3 @@ if [ -d "${HOME}/.bashrc.d" ]; then
         source "${file}"
     done
 fi
-
-# Local additions
-if [ -r "${HOME}/.bashrc.local" ]; then
-    source "${HOME}/.bashrc.local"
-fi
