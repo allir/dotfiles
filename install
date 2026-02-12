@@ -46,6 +46,10 @@ case $(uname -s) in
         echo "Installing Formulae and Casks from Brewfile bundle"
         brew bundle --file="${SCRIPTPATH}/Brewfile" || true
 
+        # Install Claude Code CLI
+        echo "Installing Claude Code"
+        "${SCRIPTPATH}/libexec/setup_claude.sh"
+
         # Add homebrew bash and zsh to /etc/shells and change shell
         if ! ( grep "${HOMEBREW_PREFIX}/bin/bash" /etc/shells &>/dev/null ); then
             echo "Adding bash to /etc/shells"
