@@ -90,9 +90,9 @@ case $(uname -s) in
 esac
 
 # Create user bin folder and link scripts
-mkdir -p "${HOME}/bin"
+mkdir -p "${HOME}/.local/bin"
 for f in "${SCRIPTPATH}/bin/"*; do
-    ln -sf "$f" "${HOME}/bin/"
+    ln -sf "$f" "${HOME}/.local/bin/"
 done
 
 if [[ $(uname -s) == "Darwin" ]]; then

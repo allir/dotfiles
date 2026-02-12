@@ -17,7 +17,7 @@ fi
 
 # Fuzzy Find
 if command -v fzf &>/dev/null; then
-  [ -f "${HOME}/.shell/.fzf.zsh" ] && source "${HOME}/.shell/.fzf.zsh"
+  source <(fzf --zsh)
 fi
 
 # Version Control Info

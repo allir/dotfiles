@@ -7,7 +7,7 @@ source "${HOME}/.shell/commonrc"
 
 # Fuzzy Find
 if command -v fzf &>/dev/null; then
-    [ -r "${HOME}/.shell/.fzf.bash" ] && source "${HOME}/.shell/.fzf.bash"
+    source <(fzf --bash)
 fi
 
 # Prompt
