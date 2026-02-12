@@ -58,8 +58,8 @@ defaults write "Apple Global Domain" AppleMenuBarVisibleInFullscreen -bool no
 ## Set the Dock Applications
 
 ### Clear the Dock and Recent Apps
-defaults delete com.apple.dock persistent-apps
-defaults delete com.apple.dock recent-apps
+defaults delete com.apple.dock persistent-apps 2>/dev/null || true
+defaults delete com.apple.dock recent-apps 2>/dev/null || true
 #defaults delete com.apple.dock persistent-others
 
 ### Set the Dock Applications
