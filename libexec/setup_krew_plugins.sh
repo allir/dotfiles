@@ -8,12 +8,12 @@ SCRIPT=$( cd "$( dirname "${BASH_SOURCE[0]}" )" &>/dev/null && pwd )/$( basename
 SCRIPTPATH=$( dirname "${SCRIPT}" )
 KREWFILEPATH=$( realpath "${SCRIPTPATH}/.." )
 
-if ! command -v kubecetl &> /dev/null; then
+if ! command -v kubectl &> /dev/null; then
     echo "kubectl is not installed. Exiting..."
     exit 1
 fi
 
-if ! [ ! -d "${HOME}/.krew" ]; then
+if [ ! -d "${HOME}/.krew" ]; then
     echo "Krew is not installed. Exiting..."
     exit 1
 fi

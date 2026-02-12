@@ -11,14 +11,14 @@ if [[ $(uname -s) == "Darwin" ]]; then
     SDPATH="/private${SDPATH}"
 fi
 
-if [ ! -d "${SDPATH}/$(whoami)" ]; then
+if [ ! -f "${SDPATH}/$(whoami)" ]; then
     # Add sudoers file for current user
     cat <<EOF | sudo tee "${SDPATH}/$(whoami)" > /dev/null
 $(whoami) ALL=(ALL) NOPASSWD: ALL
 EOF
 
     # Set permissions
-    sudo chmod 440 "/private/etc/sudoers.d/$(whoami)"
+    sudo chmod 440 "${SDPATH}/$(whoami)"
     
     # Validate file
     sudo visudo -cf "${SDPATH}/$(whoami)" > /dev/null

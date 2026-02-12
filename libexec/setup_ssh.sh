@@ -8,7 +8,7 @@ SCRIPT=$( cd "$( dirname "${BASH_SOURCE[0]}" )" &>/dev/null && pwd )/$( basename
 SCRIPTPATH=$( dirname "${SCRIPT}" )
 
 # Make sure ~/.ssh/ exists and create ~/.ssh/config.d
-if [ ! -d "${HOME}/.ssh/config." ]; then
+if [ ! -d "${HOME}/.ssh/config.d" ]; then
     umask 077
     mkdir -p "${HOME}/.ssh/config.d"
 fi

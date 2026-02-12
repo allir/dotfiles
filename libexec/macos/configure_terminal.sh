@@ -8,6 +8,12 @@ SCRIPT=$( cd "$( dirname "${BASH_SOURCE[0]}" )" &>/dev/null && pwd )/$( basename
 SCRIPTPATH=$( dirname "${SCRIPT}" )
 PROFILEPATH=$( realpath "${SCRIPTPATH}/../../share/terminal/allir.terminal" )
 
+current_profile=$(defaults read com.apple.Terminal "Default Window Settings" 2>/dev/null || echo "")
+if [[ "$current_profile" == "allir" ]]; then
+    echo "Terminal profile 'allir' is already the default, skipping"
+    exit 0
+fi
+
 #osascript "${SCRIPTPATH}/configure_terminal.scpt" "${PROFILEPATH}"
 echo "Importing Terminal profile, this will open a new Terminal window"
 sleep 1
