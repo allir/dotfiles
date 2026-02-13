@@ -6,6 +6,8 @@ source "${HOME}/.shell/path"
 
 # History Management
 export HISTFILE="${HOME}/.history"
+# share_history implies inc_append_history; unsetting it keeps history sharing
+# on read but avoids writing every command immediately to the history file.
 setopt share_history
 unsetopt inc_append_history
 setopt extended_history

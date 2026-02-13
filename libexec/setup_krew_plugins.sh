@@ -18,7 +18,7 @@ if [ ! -d "${HOME}/.krew" ]; then
     exit 1
 fi
 
-if [ ! -d "${KREWFILEPATH}" ]; then
+if [ ! -f "${KREWFILEPATH}/Krewfile" ]; then
     echo "Krewfile not found. Exiting..."
     exit 1
 fi
