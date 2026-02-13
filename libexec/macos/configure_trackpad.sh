@@ -1,4 +1,4 @@
-
+#!/usr/bin/env bash
 
 defaults write "Apple Global Domain" "com.apple.trackpad.forceClick" '1'
 defaults write "com.apple.AppleMultitouchTrackpad" "ActuateDetents" '1'

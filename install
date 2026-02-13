@@ -28,7 +28,7 @@ case $(uname -s) in
         # Ensure latest version of .dotfiles repo
         echo "Updating dotfiles repository..."
         pushd "${SCRIPTPATH}"
-        git pull
+        git pull --ff-only || echo "Warning: could not update dotfiles repo (local changes?)"
         popd
 
         # Setup sudoers for user

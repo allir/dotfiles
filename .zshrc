@@ -73,7 +73,7 @@ PROMPT='%(?..%F{red}✘ %?%f'$'\n'')%(!.%F{red}%n%f.%F{cyan}%n%f)@%F{blue}%B%m%b
 # Includes from .zshrc.d 
 if [ -d "${HOME}/.zshrc.d" ]; then
   for file in "${HOME}"/.zshrc.d/*.zshrc; do
-    source "${file}"
+    [ -f "$file" ] && source "${file}"
   done
 fi
 

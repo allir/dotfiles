@@ -27,6 +27,6 @@ fi
 # Includes from .bashrc.d 
 if [ -d "${HOME}/.bashrc.d" ]; then
     for file in "${HOME}"/.bashrc.d/*.bashrc; do
-        source "${file}"
+        [ -f "$file" ] && source "${file}"
     done
 fi
