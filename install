@@ -7,6 +7,64 @@ set -euo pipefail
 SCRIPT=$( cd "$( dirname "${BASH_SOURCE[0]}" )" &>/dev/null && pwd )/$( basename "${BASH_SOURCE[0]}" )
 SCRIPTPATH=$( dirname "${SCRIPT}" )
 
+# Parse arguments
+MIGRATE=false
+for arg in "$@"; do
+    case "$arg" in
+        --migrate) MIGRATE=true ;;
+        *) echo "Unknown argument: $arg"; exit 1 ;;
+    esac
+done
+
+# Detect legacy (pre-stow) symlinks pointing to dotfiles root
+has_legacy_symlinks() {
+    for link in "$HOME"/.*; do
+        if [ -L "$link" ]; then
+            target="$(readlink "$link")"
+            if [[ "$target" == "${SCRIPTPATH}/".*  && "$target" != "${SCRIPTPATH}/stow/"* ]]; then
+                return 0
+            fi
+        fi
+    done
+    return 1
+}
+
+# Remove legacy symlinks so stow can take over
+migrate_legacy_symlinks() {
+    echo "Removing legacy symlinks..."
+    for link in "$HOME"/.*; do
+        if [ -L "$link" ]; then
+            target="$(readlink "$link")"
+            if [[ "$target" == "${SCRIPTPATH}/".*  && "$target" != "${SCRIPTPATH}/stow/"* ]]; then
+                echo "  rm $link (was → $target)"
+                rm "$link"
+            fi
+        fi
+    done
+    # Old SSH config symlink
+    if [ -L "$HOME/.ssh/config" ]; then
+        echo "  rm $HOME/.ssh/config"
+        rm "$HOME/.ssh/config"
+    fi
+    # Old bin/ symlinks
+    for link in "$HOME/.local/bin/"*; do
+        if [ -L "$link" ] && [[ "$(readlink "$link")" == "${SCRIPTPATH}/bin/"* ]]; then
+            echo "  rm $link"
+            rm "$link"
+        fi
+    done
+}
+
+# Handle legacy symlink migration
+if has_legacy_symlinks; then
+    if [[ "$MIGRATE" == true ]]; then
+        migrate_legacy_symlinks
+    else
+        echo "Legacy (pre-stow) symlinks detected. Run with --migrate to clean up old symlinks and switch to stow."
+        exit 1
+    fi
+fi
+
 # Ask for the administrator password upfront
 sudo -v
 # Keep-alive: update existing `sudo` time stamp until finished
@@ -43,7 +101,7 @@ case $(uname -s) in
         elif [ -f /usr/local/bin/brew ]; then
             eval "$(/usr/local/bin/brew shellenv)"
         fi
-    
+
         # Install  Formulae & Casks
         echo "Installing Formulae and Casks from Brewfile bundle"
         brew bundle --file="${SCRIPTPATH}/Brewfile" || true
@@ -64,12 +122,13 @@ case $(uname -s) in
         fi
         sudo chsh -s "${HOMEBREW_PREFIX}/bin/zsh" "$(whoami)"
 
-        # Link dotfiles
-        echo "Setting up symlinks"
-        "${SCRIPTPATH}/libexec/setup_symlinks.sh"
-
-        echo "Setting up SSH config"
-        "${SCRIPTPATH}/libexec/setup_ssh.sh"
+        # Symlink dotfiles with stow
+        echo "Symlinking dotfiles with stow"
+        ( umask 077 && mkdir -p "${HOME}/.ssh/config.d" )
+        mkdir -p "${HOME}/.local/bin"
+        stow -d "${SCRIPTPATH}/stow" -t "${HOME}" --restow \
+            shell git vim tmux screen ssh bin misc
+        stow -d "${SCRIPTPATH}/stow" -t "${HOME}" --restow iterm
 
         # Configure iTerm2
         echo "Configuring iTerm2"
@@ -86,20 +145,14 @@ case $(uname -s) in
         echo "Add user to passwordless sudoers"
         "${SCRIPTPATH}/libexec/setup_sudoers.sh"
 
-        # Link dotfiles
-        echo "Setting up symlinks"
-        "${SCRIPTPATH}/libexec/setup_symlinks.sh"
-
-        echo "Setting up SSH config"
-        "${SCRIPTPATH}/libexec/setup_ssh.sh"
+        # Symlink dotfiles with stow
+        echo "Symlinking dotfiles with stow"
+        ( umask 077 && mkdir -p "${HOME}/.ssh/config.d" )
+        mkdir -p "${HOME}/.local/bin"
+        stow -d "${SCRIPTPATH}/stow" -t "${HOME}" --restow \
+            shell git vim tmux screen ssh bin misc
         ;;
 esac
-
-# Create user bin folder and link scripts
-mkdir -p "${HOME}/.local/bin"
-for f in "${SCRIPTPATH}/bin/"*; do
-    ln -sf "$f" "${HOME}/.local/bin/"
-done
 
 if [[ $(uname -s) == "Darwin" ]]; then
     # Configure macOS Terminal

@@ -38,6 +38,9 @@ brew "less"
 brew "make"
 brew "screen"
 
+## Dotfile Management
+brew "stow"
+
 ## CLI Tools
 brew "tmux"
 brew "fzf"
