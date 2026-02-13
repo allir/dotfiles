@@ -31,7 +31,9 @@ fi
 # History
 ## Prunes all duplicates from history
 history-prune(){
-    tac "$HISTFILE" | awk '!x[$0]++' > /tmp/history && tac /tmp/history > "$HISTFILE" && rm /tmp/history
+    local tmpfile
+    tmpfile=$(mktemp) || return 1
+    tac "$HISTFILE" | awk '!x[$0]++' | tac > "$tmpfile" && mv "$tmpfile" "$HISTFILE" || rm -f "$tmpfile"
 }
 ## History stats
 history-top(){

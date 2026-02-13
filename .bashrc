@@ -3,7 +3,9 @@
 source "${HOME}/.shell/commonrc"
 
 # bash Completions
-[ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ] && source "$(brew --prefix)/etc/profile.d/bash_completion.sh"
+if command -v brew &>/dev/null; then
+    [ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ] && source "$(brew --prefix)/etc/profile.d/bash_completion.sh"
+fi
 
 # Fuzzy Find
 if command -v fzf &>/dev/null; then
