@@ -5,7 +5,6 @@ alias left='ls -t -1'
 alias depth="find . -type d | awk -F\"/\" 'NF > max {max = NF-1} END {print max}'"
 alias myip='dig @resolver1.opendns.com myip.opendns.com +short'
 alias cpv='rsync -ah --info=progress2'
-alias starwars='nc towel.blinkenlights.nl 23'
 
 # Mount output for macOS
 if [[ $(uname -s) == "Darwin" ]]; then

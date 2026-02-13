@@ -39,10 +39,11 @@ if [ -d "${HOMEBREW_PREFIX}/opt/gnu-getopt/bin" ] && [[ ! "$PATH" == *${HOMEBREW
     PATH="${HOMEBREW_PREFIX}/opt/gnu-getopt/bin:$PATH"
     MANPATH="${HOMEBREW_PREFIX}/opt/gnu-getopt/share/man:$MANPATH"
 fi
+export MANPATH
 
 # Add Go to path
-if command -v go &>/dev/null && [[ ! "$PATH" == *$(go env GOPATH)/bin* ]]; then
-    PATH="$(go env GOPATH)/bin:$PATH"
+if command -v go &>/dev/null && [[ ! "$PATH" == *${GOPATH:-$HOME/go}/bin* ]]; then
+    PATH="${GOPATH:-$HOME/go}/bin:$PATH"
 fi
 
 # Add Rust to path
