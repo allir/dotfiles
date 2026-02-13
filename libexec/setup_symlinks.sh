@@ -9,7 +9,7 @@ SCRIPTPATH=$( dirname "${SCRIPT}" )
 DOTFILES_PATH=$(realpath "${SCRIPTPATH}/..")
 
 # Symlink all "dotfiles" with some exeptions
-NOLINK=". .. .git .gitignore"
+NOLINK=". .. .git .gitignore .claude"
 echo "Symlinking dotfiles from ${DOTFILES_PATH}"
 for file in "${DOTFILES_PATH}"/.*; do
   f=$( basename "$file")
