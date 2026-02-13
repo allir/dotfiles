@@ -8,8 +8,10 @@ if [ -x /usr/libexec/path_helper ]; then
 fi
 
 # Homebrew
-if [ -f /opt/homebrew/bin/brew ] || [ -f /usr/local/bin/brew ]; then
-    eval "$(/opt/homebrew/bin/brew shellenv 2>/dev/null)" && eval "$(/usr/local/bin/brew shellenv 2>/dev/null)"
+if [ -f /opt/homebrew/bin/brew ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [ -f /usr/local/bin/brew ]; then
+    eval "$(/usr/local/bin/brew shellenv)"
 fi
 
 # Use GNU Tools over BSD
@@ -33,9 +35,9 @@ if [ -d "${HOMEBREW_PREFIX}/opt/gnu-tar/libexec" ] && [[ ! "$PATH" == *${HOMEBRE
     PATH="${HOMEBREW_PREFIX}/opt/gnu-tar/libexec/gnubin:$PATH"
     MANPATH="${HOMEBREW_PREFIX}/opt/gnu-tar/libexec/gnuman:$MANPATH"
 fi
-if [ -d "${HOMEBREW_PREFIX}/opt/gnu-getopt/libexec" ] && [[ ! "$PATH" == *${HOMEBREW_PREFIX}/opt/gnu-getopt/libexec/gnubin* ]]; then
+if [ -d "${HOMEBREW_PREFIX}/opt/gnu-getopt/bin" ] && [[ ! "$PATH" == *${HOMEBREW_PREFIX}/opt/gnu-getopt/bin* ]]; then
     PATH="${HOMEBREW_PREFIX}/opt/gnu-getopt/bin:$PATH"
-    MANPATH="${HOMEBREW_PREFIX}/opt/gnu-getopt/libexec/gnuman:$MANPATH"
+    MANPATH="${HOMEBREW_PREFIX}/opt/gnu-getopt/share/man:$MANPATH"
 fi
 
 # Add Go to path

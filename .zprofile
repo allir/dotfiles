@@ -13,4 +13,4 @@ setopt hist_find_no_dups
 setopt hist_ignore_all_dups
    
 export HISTSIZE=100000
-export HISTFILESIZE=1000000
+export SAVEHIST=1000000
