@@ -127,7 +127,7 @@ case $(uname -s) in
         ( umask 077 && mkdir -p "${HOME}/.ssh/config.d" )
         mkdir -p "${HOME}/.local/bin"
         stow -d "${SCRIPTPATH}/stow" -t "${HOME}" --restow \
-            shell git vim tmux screen ssh bin misc
+            shell git vim tmux screen ssh bin
         stow -d "${SCRIPTPATH}/stow" -t "${HOME}" --restow iterm
 
         # Configure iTerm2
@@ -150,7 +150,7 @@ case $(uname -s) in
         ( umask 077 && mkdir -p "${HOME}/.ssh/config.d" )
         mkdir -p "${HOME}/.local/bin"
         stow -d "${SCRIPTPATH}/stow" -t "${HOME}" --restow \
-            shell git vim tmux screen ssh bin misc
+            shell git vim tmux screen ssh bin
         ;;
 esac
 
