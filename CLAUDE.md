@@ -54,3 +54,25 @@ To add a new config file: place it in the appropriate package under `stow/<packa
 - Custom kubectl plugins in `stow/bin/.local/bin/` follow the `kubectl-<name>` naming convention
 - Git config supports local overrides via `~/.gitconfig.local` (included but not tracked)
 - Tmux prefix is `Ctrl+a`; Vim leader is `,`
+
+## Pitfalls
+
+- **Homebrew paths differ by architecture.** Apple Silicon uses `/opt/homebrew`, Intel uses `/usr/local`. Always use an `if/elif` pattern — never hardcode one path. The canonical pattern is in `.shell/path`.
+- **Bash ≠ zsh for history.** Zsh requires `SAVEHIST` (not `HISTFILESIZE`). Changes to history config in `.zprofile` must account for both shells.
+- **`share_history` + `unsetopt inc_append_history` is intentional.** This keeps history sharing on read without writing every command immediately. Do not "fix" this.
+- **Color aliases live in `.shell/profile`, not `commonrc`.** They are co-located with `CLICOLOR`, `LSCOLORS`, `GREP_OPTS`, and `LESS` so all color config stays in one place.
+- **Avoid subprocesses in shell startup files.** Use parameter expansion defaults (e.g. `${GOPATH:-$HOME/go}`) instead of calling commands like `go env GOPATH`.
+- **Pre-create shared directories before stow.** Run `mkdir -p ~/.local/bin` (and similar) before `stow --restow` to prevent stow from folding the entire directory into a single symlink, which would break other tools that install there.
+- **Tmux/clipboard is cross-platform.** Clipboard bindings use `if-shell` to choose between `pbcopy` (macOS) and `xclip` (Linux). New clipboard bindings must follow this pattern.
+
+## Plans
+
+Design documents live in `docs/plans/`. Status is tracked in [`docs/plans/README.md`](docs/plans/README.md).
+
+When creating a plan:
+1. Create `docs/plans/YYYY-MM-DD-short-topic.md` — no status block in the file itself
+2. Add a row to `docs/plans/README.md` with status `Planned` and empty commits column
+3. Related plans share a name prefix (e.g. `shellcheck-audit-{high,medium,low}`)
+4. On completion, update the row: status → `Done`, fill in commit hashes
+
+Valid statuses: `Planned`, `In Progress`, `Done`, `Abandoned`.
