@@ -1,4 +1,4 @@
-# shellcheck disable=SC2034,SC1090,SC1091
+# shellcheck disable=SC2148,SC2034,SC1090,SC1091
 # Aliases / Functions
 source "${HOME}/.shell/commonrc"
 
@@ -12,6 +12,11 @@ if command -v fzf &>/dev/null; then
     source <(fzf --bash)
 fi
 
+# fnm (Node Version Manager)
+if command -v fnm &>/dev/null; then
+  eval "$(fnm env --shell bash --use-on-cd)"
+fi
+
 # Prompt
 ## Git Prompt
 if [ -r "${HOMEBREW_PREFIX}/opt/bash-git-prompt/share/gitprompt.sh" ]; then
@@ -20,7 +25,7 @@ if [ -r "${HOMEBREW_PREFIX}/opt/bash-git-prompt/share/gitprompt.sh" ]; then
     GIT_PROMPT_THEME_FILE="${HOME}/.shell/bash-git-prompt-colors"
     source "${HOMEBREW_PREFIX}/opt/bash-git-prompt/share/gitprompt.sh"
 else
-    PS1='\[\e[0;36m\]\u\[\e[0m\]@\e[0;34m\]\h\[\e[0m\] \w \$ '
+    PS1='\[\e[0;36m\]\u\[\e[0m\]@\[\e[0;34m\]\h\[\e[0m\] \w \$ '
 fi
 
 

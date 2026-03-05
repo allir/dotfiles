@@ -20,6 +20,11 @@ if command -v fzf &>/dev/null; then
   source <(fzf --zsh)
 fi
 
+# fnm (Node Version Manager)
+if command -v fnm &>/dev/null; then
+  eval "$(fnm env --shell zsh --use-on-cd)"
+fi
+
 # Version Control Info
 autoload -Uz vcs_info
 autoload -U colors && colors

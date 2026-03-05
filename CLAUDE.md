@@ -10,7 +10,7 @@ Personal macOS/Linux dotfiles repository for Aðalsteinn Rúnarsson. Manages she
 
 ```bash
 # Lint all shell scripts
-shellcheck install libexec/*.sh libexec/macos/*.sh stow/bin/.local/bin/* stow/shell/.shell/commonrc stow/shell/.shell/awspro
+shellcheck install libexec/*.sh libexec/macos/*.sh stow/bin/.local/bin/* stow/shell/.shell/commonrc stow/shell/.shell/awspro stow/shell/.shell/profile stow/shell/.shell/path stow/shell/.bashrc stow/shell/.zshrc
 ```
 
 No test suite — validate changes by running `shellcheck` and testing interactively in a new shell.
@@ -54,6 +54,7 @@ To add a new config file: place it in the appropriate package under `stow/<packa
 - Custom kubectl plugins in `stow/bin/.local/bin/` follow the `kubectl-<name>` naming convention
 - Git config supports local overrides via `~/.gitconfig.local` (included but not tracked)
 - Tmux prefix is `Ctrl+a`; Vim leader is `,`
+- Sourced files without shebangs use `# shellcheck shell=bash` at the top; dynamic `source` lines get `# shellcheck disable=SC1091` inline
 
 ## Pitfalls
 

@@ -1,7 +1,7 @@
+# shellcheck shell=bash
 # General
 OWNER='Aðalsteinn Rúnarsson'
-OS=`uname -s`
-#ARCH=`uname -m`
+OS=$(uname -s)
 LANG=en_US.UTF-8
 export OWNER LANG
 
@@ -26,4 +26,5 @@ alias grep='grep ${GREP_OPTS}'
 ## less colors
 export LESS="--RAW-CONTROL-CHARS"
 ## Use colors for less, man, etc.
+# shellcheck disable=SC1091
 [[ -f ${HOME}/.LESS_TERMCAP ]] && source "${HOME}/.LESS_TERMCAP"

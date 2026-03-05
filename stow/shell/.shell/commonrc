@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 # Aliases
 alias ll='ls -alF'
 alias lt='du -sh * | sort -h -r'
@@ -14,7 +15,7 @@ if [[ $(uname -s) == "Darwin" ]]; then
 fi
 
 # Flush DNS cache on macOS
-if [[ `uname -s` == "Darwin" ]]; then
+if [[ $(uname -s) == "Darwin" ]]; then
     alias flushdns='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
 fi
 
@@ -32,7 +33,11 @@ fi
 history-prune(){
     local tmpfile
     tmpfile=$(mktemp) || return 1
-    tac "$HISTFILE" | awk '!x[$0]++' | tac > "$tmpfile" && mv "$tmpfile" "$HISTFILE" || rm -f "$tmpfile"
+    if tac "$HISTFILE" | awk '!x[$0]++' | tac > "$tmpfile" && mv "$tmpfile" "$HISTFILE"; then
+        :
+    else
+        rm -f "$tmpfile"
+    fi
 }
 ## History stats
 history-top(){
@@ -54,9 +59,16 @@ alias gitno='git --no-pager'
 alias pve='python3 -m venv ./venv'
 alias pva='source ./venv/bin/activate'  
 
+# Claude Code
+if command -v claude &>/dev/null; then
+    alias cogc='clear && claude'
+    alias c='clear && claude'
+fi
+
 # Docker/Kubernetes
 alias d='docker'
 alias k='kubectl'
-alias fine='docker run -it --rm ghcr.io/pdevine/thisisfine'
 
+
+# shellcheck disable=SC1091
 source "${HOME}/.shell/awspro"

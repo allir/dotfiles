@@ -13,7 +13,6 @@ awspro() {
     local profile=""
     local error_profile="ERROR: '--profile' requires a non-empty option argument."
     local login="false"
-    local verbose=0
 
     # Handle arguments
     while true; do
@@ -39,9 +38,6 @@ awspro() {
             show_help    # Display a usage synopsis.
             return
             ;;
-        -v|--verbose)
-            verbose=$((verbose + 1))  # Each -v adds 1 to verbosity.
-            ;;
         --)              # End of all options.
             shift
             break
@@ -56,11 +52,12 @@ awspro() {
     done
 
     if [[ -n "$profile" ]]; then
-        profile=$(sed -n "s/\[profile \(.*\)\]/\1/gp" "${HOME}/.aws/config" | grep -i "$profile")
+        local search="$profile"
+        profile=$(sed -n "s/\[profile \(.*\)\]/\1/gp" "${HOME}/.aws/config" | grep -i "$search")
         if [[ -n $profile ]]; then
             export AWS_PROFILE=$profile
         else
-            printf "%s\n" "Profile $1 not found"
+            printf "%s\n" "Profile '$search' not found"
             return
         fi
     else
