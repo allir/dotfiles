@@ -26,11 +26,11 @@ git clone https://github.com/allir/dotfiles.git ~/.dotfiles
 ~/.dotfiles/install
 ```
 
-The `install` script detects platform (Darwin/Linux), requests sudo upfront with a keep-alive loop, then runs setup scripts from `libexec/` in sequence. On macOS: Xcode CLI tools → Homebrew → Brewfile → Claude Code → shell registration → symlinks → SSH → iTerm2 → Dock → Terminal → bin scripts. Linux runs a subset (sudo → symlinks → SSH).
+The `install` script detects platform (Darwin/Linux), requests sudo upfront with a keep-alive loop, then runs setup scripts from `libexec/` in sequence. On macOS: Xcode CLI tools → git pull → sudoers → Homebrew → Brewfile → Claude Code → shell registration → symlinks (all stow packages) → iTerm2 → Dock → Terminal. Linux runs a subset (sudoers → symlinks).
 
 ## Architecture
 
-**Stow-based symlink management:** All linkable config lives under `stow/` in per-tool packages that mirror `$HOME`. The `install` script calls `stow --restow` to create symlinks. Packages: `shell`, `git`, `vim`, `tmux`, `screen`, `ssh`, `iterm` (macOS only), `bin`, `misc`.
+**Stow-based symlink management:** All linkable config lives under `stow/` in per-tool packages that mirror `$HOME`. The `install` script calls `stow --restow` to create symlinks. Packages: `shell`, `git`, `vim`, `tmux`, `screen`, `ssh`, `iterm` (macOS only), `bin`.
 
 To add a new config file: place it in the appropriate package under `stow/<package>/` mirroring its `$HOME` path (e.g. `stow/git/.gitconfig` → `~/.gitconfig`). To add a new package: create `stow/<name>/`, add files, and list the package in the `stow` command in `install`.
 
